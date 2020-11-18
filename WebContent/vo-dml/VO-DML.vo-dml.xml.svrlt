@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svrl:schematron-output xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:saxon="http://saxon.sf.net/"
+                        xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:fct="localFunctions"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                        title="Schematron VO-DML Validator"
+                        schemaVersion=""><!--   
+		   
+		   
+		 --><svrl:ns-prefix-in-attribute-values uri="http://www.ivoa.net/xml/VODML/v1" prefix="vo-dml"/>
+  <svrl:ns-prefix-in-attribute-values uri="localFunctions" prefix="fct"/>
+  <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
+  <svrl:active-pattern document="file:/C:/workspaces/eclipse-oxygen/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:fired-rule context="vodml-id[not(../name() = 'vo-dml:model')]"/>
+  <svrl:active-pattern document="file:/C:/workspaces/eclipse-oxygen/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:fired-rule context="objectType|dataType|enumeration|primitiveType"/>
+  <svrl:active-pattern document="file:/C:/workspaces/eclipse-oxygen/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml"/>
+  <svrl:fired-rule context="composition/datatype/vodml-ref"/>
+  <svrl:fired-rule context="composition/datatype/vodml-ref"/>
+  <svrl:fired-rule context="composition/datatype/vodml-ref"/>
+  <svrl:active-pattern document="file:/C:/workspaces/eclipse-oxygen/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml"/>
+  <svrl:active-pattern document="file:/C:/workspaces/eclipse-oxygen/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:failed-assert test="number($maxOccurs) &gt; 0 and ($minOccurs = '0' or $minOccurs = $maxOccurs)"
+                      flag="warning"
+                      location="/*:model[namespace-uri()='http://www.ivoa.net/xml/VODML/v1'][1]/dataType[2]/attribute[1]/multiplicity[1]">
+    <svrl:text> 
+Attribute Identifier.field has multiplicity 1..-1 which is STRONLY DISCOURAGED.
+  </svrl:text>
+  </svrl:failed-assert>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/composition"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/composition"/>
+  <svrl:fired-rule context="reference"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="constraint[@xsi:type='vo-dml:SubsettedRole']"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="constraint[@xsi:type='vo-dml:SubsettedRole']"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="reference"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/composition"/>
+  <svrl:fired-rule context="reference"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+  <svrl:fired-rule context="objectType/extends"/>
+  <svrl:fired-rule context="reference"/>
+  <svrl:fired-rule context="objectType/attribute | dataType/attribute"/>
+  <svrl:fired-rule context="attribute/multiplicity"/>
+</svrl:schematron-output>

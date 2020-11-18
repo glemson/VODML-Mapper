@@ -1,0 +1,360 @@
+{
+	"models": [
+		{
+			"url": "http://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/ivoa/IVOA.vo-dml.xml",
+			"name": "ivoa"
+		},
+		{
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/VO-DML.vo-dml.xml",
+			"name": "vo-dml"
+		},
+		{
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/PhotDM-alt.vo-dml.xml",
+			"name": "photdm-alt"
+		},
+		{
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/SourceDM.vo-dml.xml",
+			"name": "src"
+		}
+	],
+	"tables": {
+		"TAP": [],
+		"VOTABLEs": [],
+		"VizieR": [
+			"J/A+A/461/397",
+			"J/A+A/347/47"
+		]
+	},
+	"mapper": {
+		"objects": [
+			{
+				"id": "T1382601171114_1",
+				"utype": "src:source.Source",
+				"vodmltype": "objectType",
+				"position": {
+					"left": 50.31250333786011,
+					"top": 50.20833158493042
+				},
+				"literals": []
+			},
+			{
+				"id": "T1382601171114_14",
+				"utype": "src:source.LuminosityMeasurement",
+				"vodmltype": "objectType",
+				"position": {
+					"left": 255.52081632614136,
+					"top": 625.2951693534851
+				},
+				"literals": []
+			},
+			{
+				"id": "T1382601171114_26",
+				"utype": "photdm-alt:PhotometryFilter",
+				"vodmltype": "objectType",
+				"position": {
+					"left": 620.3125033378601,
+					"top": 831.5451693534851
+				},
+				"literals": [
+					{
+						"utype": "photdm-alt:PhotometryFilter.name",
+						"value": "V"
+					}
+				]
+			},
+			{
+				"id": "T1382601171114_68",
+				"utype": "src:source.SkyCoordinate",
+				"vodmltype": "dataType",
+				"position": {
+					"left": 542.3784823417664,
+					"top": 332.82986783981323
+				},
+				"literals": []
+			},
+			{
+				"id": "T1382601171114_74",
+				"utype": "src:source.SkyCoordinateFrame",
+				"vodmltype": "objectType",
+				"position": {
+					"left": 448.45489835739136,
+					"top": 500.34723234176636
+				},
+				"literals": [
+					{
+						"utype": "src:source.SkyCoordinateFrame.name",
+						"value": "ICRS"
+					}
+				]
+			}
+		],
+		"tables": [
+			{
+				"id": "T1382601171114_44",
+				"position": {
+					"left": 1088.9757723808289,
+					"top": 122.53473234176636
+				},
+				"source": {
+					"id": "VizieR::J/A+A/347/47",
+					"type": "VIZIER_TABLE",
+					"description": "\n      Summary of optical identification program of new bright soft high-galactic-latitude RASS sources with HR1<0.\n    \n      Individual notes of table3.dat\n    "
+				}
+			}
+		],
+		"maps": [
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "collection",
+						"utype": "src:source.Source.luminosity",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"rank": 0
+					},
+					"connectorType": "collection"
+				},
+				"to": {
+					"objectId": "T1382601171114_14",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"connectorType": "collection"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_14",
+					"role": {
+						"vodmltype": "reference",
+						"utype": "src:source.LuminosityMeasurement.filter",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"rank": 0
+					},
+					"connectorType": "reference"
+				},
+				"to": {
+					"objectId": "T1382601171114_26",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"connectorType": "reference"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_14",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.LuminosityMeasurement.value",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"rank": 0
+					},
+					"connectorType": "dataType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "Vmag",
+						"datatype": "float",
+						"description": "? Visual magnitude V.",
+						"rank": 13,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "vo-dml:Object.ID",
+						"name": "ID",
+						"datatype": "vo-dml:Identifier",
+						"rank": 0
+					},
+					"connectorType": "dataType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "recno",
+						"datatype": "int",
+						"description": "Record number within the original table (starting from 1)",
+						"rank": 0,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.Source.position",
+						"name": "position",
+						"datatype": "src:source.SkyCoordinate",
+						"rank": 0
+					},
+					"connectorType": "dataType"
+				},
+				"to": {
+					"objectId": "T1382601171114_68",
+					"type": {
+						"vodmltype": "dataType",
+						"utype": "src:source.SkyCoordinate"
+					},
+					"connectorType": "dataType"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_68",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.SkyCoordinate.longitude",
+						"name": "longitude",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"rank": 0
+					},
+					"connectorType": "dataType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "RAJ2000",
+						"datatype": "char",
+						"description": "? Optical counterpart right ascension (J2000)",
+						"rank": 16,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_68",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.SkyCoordinate.latitude",
+						"name": "latitude",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"rank": 0
+					},
+					"connectorType": "dataType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "DEJ2000",
+						"datatype": "char",
+						"description": "? Optical counterpart (J2000)",
+						"rank": 17,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.Source.classification",
+						"name": "classification",
+						"datatype": "src:source.SourceClassification",
+						"rank": 0
+					},
+					"connectorType": "enumeration"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "Class",
+						"datatype": "char",
+						"description": "Classification",
+						"rank": 9,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.Source.description",
+						"name": "description",
+						"datatype": "ivoa:string",
+						"rank": 0
+					},
+					"connectorType": "primitiveType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "Note",
+						"datatype": "char",
+						"description": "Text of the note",
+						"rank": 20,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_68",
+					"role": {
+						"vodmltype": "reference",
+						"utype": "src:source.SkyCoordinate.frame",
+						"name": "frame",
+						"datatype": "src:source.SkyCoordinateFrame",
+						"rank": 0
+					},
+					"connectorType": "reference"
+				},
+				"to": {
+					"objectId": "T1382601171114_74",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.SkyCoordinateFrame"
+					},
+					"connectorType": "reference"
+				}
+			},
+			{
+				"from": {
+					"objectId": "T1382601171114_1",
+					"role": {
+						"vodmltype": "attribute",
+						"utype": "src:source.Source.name",
+						"name": "name",
+						"datatype": "ivoa:string",
+						"rank": 0
+					},
+					"connectorType": "primitiveType"
+				},
+				"to": {
+					"tableId": "T1382601171114_44",
+					"column": {
+						"name": "Name",
+						"datatype": "char",
+						"description": "J2000 X-ray position from the RASS BSC",
+						"rank": 1,
+						"xmlid": null
+					},
+					"connectorType": "tableColumn"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,52 @@
+
+
+BUGS:
+--------
+DONE  In GUI when drawing line from first port in multi-port attribute, dropping on canvas, the connection is made to the last dot.
+OK when connecting directly.
+
+DONE For attributes/references with multiplicity > 1, do NOT allow multiple lines from end point, but only  allow creation of multiple endpoints, as this makes ordering explicit. In GUI add support for arrays of datatypes somehow..
+In particular, since order may be important, allow creating multiple output ports and allow a SINGLE link from each port when creating values.
+DO NOT allow multiple lines form single port! As that makes it basically impossible to indicate the order.
+
+??? Must store info on roles that have been given multiple endpoints.
+
+DONE REMOTEREFERENCE not generated properly.
+
+NEW FEATURES:
+------------------------
+Validate 'target' in ormreferences
+
+Consider using only composition for CONTAINER as well?
+
+POSTPONED Use __vot__: as model iso vo-dml
+
+Support OPTIONMAPPING
+
+DONE (give description as well): Give more information about types, including all super types. 
+
+DONE Give option to open info about type in HTML.
+
+DONE Deal with subsetting.
+
+When giving list of types to drop check that not only subtypes of declared type *from the same model* are included. 
+
+??? May also want to allow writing of literal for single.
+
+In votable, ensure all attributes with given role are in same ATTRIBUTE/REFERENCE
+
+DONE Get list of pre-defined models from server iso hardcoding on JS.
+
+Support multi select for moving etc
+
+??? Support popup to identify a line's start/endpoint
+
+DONE The choose-type popup when a line is dropped on the canvas, should choose the type automatically when only one is available
+
+QUESTION should we add datalink to ivoa model, or make separate VO-DML model?
+
+When generating VOTable mapping for actual VOTable, include the latter's data parts and all other annotations. 
+
+When generating VOTable for actual VOTable, ensure no mixup in IDs on FIELDs etc
+
+Make VODMLMapper use SciServer's authentication (AND authorization?)

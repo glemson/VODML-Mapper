@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>File Upload</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+        .bar {
+    height: 18px;
+    background: green;
+}
+        </style>
+    </head>
+    <body>
+        <form method="POST" action="uploader" enctype="multipart/form-data" >
+            File:
+            <input type="file" name="file" id="file" /> <br/>
+            <input type="submit" value="Upload" name="upload" id="upload" />
+        </form>
+        <hr/>
+        <input id="fileupload" type="file" name="files[]" data-url="uploader" multiple><br/>
+        <div id="progress">
+    <div class="bar" style="width: 0%;"></div>
+</div>
+        
+<script src="js/jquery.js"></script>
+<script src="js/jQuery-File-Upload-master/js/vendor/jquery.ui.widget.js"></script>
+<script src="js/jQuery-File-Upload-master/js/jquery.iframe-transport.js"></script>
+<script src="js/jQuery-File-Upload-master/js/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        },
+        add: function (e, data) {
+            data.context = $('<button/>').text('Upload')
+                .appendTo(document.body)
+                .click(function () {
+                    data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                    data.submit();
+                });
+        },
+        done: function (e, data) {
+            data.context.text('Upload finished.');
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+});
+</script>
+        
+    </body>
+</html>

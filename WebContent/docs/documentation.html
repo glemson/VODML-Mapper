@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>VO-DML Mapper: Documentation</title>
+<style>
+body {font-family:Arial,Helvetica,sans-serif;font-size:1.1em;}
+img.expand{height:150px;}
+</style>
+
+<script type="text/javascript">
+var toggleImgHeight = function(elem, max) {
+	toggleHeight(elem, max);
+	//var legend = .nextSibling();
+	var jqElem = $(elem);
+	var jqLegend = $(" + div.legend", jqElem);
+	if(jqLegend != null) {
+		var title = jqElem.attr("title");
+		if(title != null && title.length > 0) {
+			title = title.substring(title.lastIndexOf(" "));
+			jqLegend.text("(click image to" + title + ")");
+		}
+	}
+}
+/**
+ * toggles the given elements HEIGTH between 100% and the given max
+ * @param elem - the element to toggle
+ * @param max - the value to shrink to
+ */
+function toggleHeight(elem, max) {
+    if (max == null || max == '')
+        max = "150px";
+    var h = elem.style.height;
+    if(h == null || h == '')
+        h = getStyle(elem, 'height');
+    if(h == null || h == '' || h == '100%') {
+        elem.style.height = max;
+        elem.title = "click to enlarge"
+    } else {
+        elem.style.height = '100%';
+        elem.title = "click to shrink";
+    }
+}
+
+function getStyle(elem, cssprop) {
+    if (elem.currentStyle) //IE
+        return elem.currentStyle[cssprop]
+    else if (document.defaultView && document.defaultView.getComputedStyle) //Firefox
+        return document.defaultView.getComputedStyle(elem, "")[cssprop]
+    else
+        //try and get inline style
+        return elem.style[cssprop]
+}
+
+</script>
+</head>
+<body>
+	<table style="width:100%"><tr><td style="width:5%"><td style="width:70%;vertical-align:top">
+		<h1 style="font-size:38.5px"><img src="../css/images/Logo.png" style="vertical-align:middle"/>&nbsp;The VO-DML Mapper</h1>
+		</td><td style="width:20%">
+<img src="../css/images/ivoa_logoc2_72px.jpg" /></td><td style="width:10%"></tr></table>	
+<hr/>
+<h1>This page is a work in progress and needs updating to conform to current state.</h1>
+<hr/>
+<table><tr><td style="width:5em"/><td>
+<p>
+This documentation describes how one can use the VO-DMl Mapper dashboard to draw mapping diagrams,
+how one can translate it to a VO-DML/UTYPE annotated VOTable and how one can save it in a server-side repository
+for later retrieval, and how one can publish it to other users.
+</p>
+<h1>Overview of the Mapping Dashboard</h1>
+<p>
+The following diagram identifies the main panels in the mapping dashboard. 
+The numbers in the panels refer to the sections below describing them.
+</p>
+<img src="images/VO-DMLMapper-explain.png" 
+		class="expand" style="max-height: 700px;" alt="Dashboard Layout"
+		title="click to enlarge" onclick="toggleImgHeight(this);" />
+			<div class="legend">(click image to toggle size)</div>
+<h2> 1. Models management panel</h2>
+<p>
+This panel allows one to load models into the client, so that their types can be used in the mapper.
+To load new models, right-click on the root of the tree, labeled "Models", and select "Load models".
+</p>
+<img src="images/load_model_dropdown.png" 
+		class="expand" style="max-height: 400px;" alt="Dashboard Layout"
+		title="click to enlarge" onclick="toggleImgHeight(this);" />
+			<div class="legend">(click image to toggle size)</div>
+<p>A dialogue will appear looking as follows:
+</p>
+<img src="images/load_model_dialog.png" style="max-height: 400px;" alt="Dashboard Layout"/>
+<p>
+One can select from a predefined set of standard models in the drop-down, 
+or enter the URL identifying a VO-DML/XML model file in the text box.
+The models in the drop-down are all "standard" IVOA models, identified
+by their formal short-name that MUST also be used as prefix for UTYPEs pointing into the model.<br/>
+
+There is a special model named <i>vo-dml</i> that will always be loaded as well. 
+It is a helper model for instantiations specially built for this tool.
+This model contains types representing some of the special mapping patterns that one may 
+use/need when mapping vo-dml models to tables. 
+The main types in this model of relevance or ORMReference, RemoteReference and Primary key.
+Furthermore it contains abstract super types for ObejctType instances that define dsome serialization/mapping specific features such 
+as a PRIMARYKEY attribute and a CONTAINER reference.
+It is likely that this model will be replaced in some future with one more directly reflecting the mapping specification.
+</p>
+<img src="images/load_model_dialog_open.png"  style="max-height: 400px;" />
+<p>
+Upon clicking the "Load" button next to the drop-down, a request is made to the 
+server to load the selected model, together with all models it depends on through model imports, possibly recursively.
+This process is asynchronous, but users should not interfere with it. At some point a progress bar or waiting panel should
+make this more obvious.
+</p>
+<p>The loaded models will appear as nodes under the root node in the tree, with their 
+packages and types as sub-nodes of the models. Packages are indicated with a folder icon (<img src="images/folder-closed.png"/>), 
+value types with a blank (<img src="../css/images_jstree/Document-Blank-icon-16.png"/>) 
+and object types with a greyish (<img src="../css/images_jstree/Document-icon-16.png"/>) document icon.
+
+A right-click on a model or any of its children allows one to open the HTML documentation of the model at the 
+appropriate location, assuming that HTML document is generated by, or written in accordance to, the HTML generator in the set of VO-DML builder 
+ant scripts.</p>
+<p>
+The right-click menu on the root model also contains a "Clear All" item. Clicking this will unload all models.<br/>
+NOTE, this functionality is not that well tested and is not yet in sync with all the other panels.
+</p>
+<h2> 2. Tables management panel</h2>
+<p>
+The right most panel allows users to load tabular data sets into the mapper. 
+These will serve as the targets for the maps. There are currently three types of data one can upload.
+Each represented by their own node under the root.
+</p>
+<h3>TAP</h3>
+<p>
+TAP indicates tables loaded from a TAP service. Right-click the TAP node and click the "Add TAP Schema" menu box.
+</p>
+<img src="images/load_tap_dropdown.png"/>
+<p> A dialogue appears allowing you first to select a TAP endpoint.</p>
+<img src="images/load_tap_select_tap.png"/>
+<p> Confirm the selection by clicking the button labelled "Select Endpoint". 
+The TAP endpoint is queried for schemas, whcih show up in the large list box. 
+Selecting one of these shows the number of tables contained in the schema on the right of the list.
+</p>
+<img src="images/load_tap_select_endpoint.png"/>
+<p>Clicking "Load Tables" will retrieve the metadata about the tables in the schema and add a node for the schema 
+and its tables under a node representing the TAP endpoint in the TAP node:
+</p>
+<img src="images/load_tap_result.png"/>
+<p>NB Some TAP endpoints have very large schemas, for examples check out the VIzieR TAP endpoint that is currently
+available in the dropdown. To load such a schema with thousands of tables will not be very useful.
+A more advanced table chooser should be built in. To avoid overloading the GUI in this proof-of-concept
+implementation, we load at most 100 tables from a schema.  
+</p>
+<h3>VizieR tables</h3>
+<p>The table tree contains a node labeled VizieR. Right-clicking this allows one to choose 
+to add tables from the <a href="http://vizier.u-strasbg.fr/viz-bin/VizieR" target="_blank">VizieR</a> catalogue.
+</p>
+<img src="images/load_tap_result.png"/>
+
+<h2> 3. Mapping panel</h2>
+<p>
+The core of the dashboard is the mapping panel. This is where the actual maps between data models and table sets are defined.
+One can drag types and tables form there tree directly onto the panel.
+</p>
+<h3>Adding type instances</h3>
+<p>
+Left-click a type, drag it onto the panel and release it. 
+What will show is a representation of the type that is similar to the way it is represented in a UML diagram, but with
+some essential differences.
+</p><p>
+The type is represented by a rectangle with in the title bar then name of the type, and below
+this an entry for each of the roles <i>available</i> on the type. Which elements are shown
+depends on the kind of type that is selected.</p>
+<p>
+For object types all the attributes, references and collections defined on the type itself are included, 
+together with the roles inherited from possible super-types. 
+A special set of roles are added that one can interpret as being "inherited" from a special vo-dml:ObjectType that
+acts as the ultimate super-type for all object types.
+This type includes some special roles that are never explicitly defined on any object type,
+but can play a role especially in serializations. These are described <a href="#vodml-model">below</a>.
+</p>
+
+<a name="vodml-model"/><h3>the vo-dml model</h3>
+<p>
+As mentioned above, when dragging a type on the mapping canvas, what one obtains is a representation of an instance of the type,
+rather than of the type itself. The type includes entries not only for roles defined on itself, but also for all
+the roles inherited from its super-type(s).
+This includes in this tool an ultimate super-type named vo-dml:ObjectType.
+That type defines some special roles that are never explicitly defined on any object type,
+but can play a role in serializations, i.e. when describing <i>instances</i>. 
+These roles are
+<ul>
+<li>PRIMARYKEY: attribute<br/>An attribute that represents an identifier. Instances of ObjectType-s are 
+always assumed to be identified not by their value but by some ID. This attribute represents this.
+ID-s can come in many different types depending on the serialization or application.
+Here we model it as a special purpose datatype with one or more field-s. Each of the fields can be 
+given a literal value or can be mapped to a column. This datatype is also one of the  few that can be mapped directly to
+a COLUMN.</li>
+<li>type: attribute<br/>There are occasions in serializations, especially in certain object-relational
+mapping patterns where the type of an 
+instance must be explicitly identified with a value in a column. This type attribute allows one to do so.
+In a pure VO-DMl setting it would be nice of this value could be a utype identifying the 
+actual type, but more generally it will be true that the actual values in the table 
+will have to be given an explicit mapping to the utype. 
+ <br/>
+TBD this is not yet supported in this tool.</li>
+<li>CONTAINER: reference<br/>
+It is often the case when mapping a composition relation, especially in object-relational 
+mapping patterns, that child objects are stored in a table different from the
+parent. In that case generally there will be foreign key from the child to the parent table. In the mapper
+this is explicitly supported using a CONTAINER reference. This can be instantiated using a vo-dml:ORMReference. <br/>
+TODO add illustrations.
+</ul>
+</p>
+<h2> 4. Console and MyFiles</h2>
+<h3>Log console</h3>
+<p>
+The console has a tab showing messages generated by the web client. 
+Look here if at some point an action seems to do nothing. It may be that the tool has swallowed
+an exception and not shown it explicitly through a pop-up dialogue. 
+The console can be cleared using a right-click menu item.
+</p>
+<h3>Uploaded Files </h3>
+<p> NB THIS IS CURRENTLY NOT SUPPORTED!!!
+</p>
+<p>
+The console also has a tab where a registered user can manage his/her uploaded table files.
+A user can upload files to the server, where they can be stored.
+Uploaded files can be loaded into the Tables manager.
+</p>
+<img src="images/upploaded_files.png" 
+		class="expand" style="max-height: 700px;" alt="Dashboard Layout"
+		title="click to enlarge" onclick="toggleImgHeight(this);" />
+			<div class="legend">(click image to toggle size)</div>
+<p>
+Credits: this interface is built with 
+<h2> 5. Links</h2>
+This list contains some links to pages.
+It includes a link to this documentation page and [TBD!] links to a page with information how to register. 
+
+<h1>Credits</h1>
+This interface is built using <a href="" target="_blank">jQuery</a> and a variety of jQuery plugins:
+<ul>
+<li>jQuery.jsPlumb<br>
+For drawing the rectangles and connecting them with lines.</li>
+<li>jQuery-File-Upload-Master<br/>
+For the file upload management.</li>
+<li>jQuery.dataTables<br/>
+Wherever tables are displayed.</li>
+<li>jQuery.jstree<br/>
+Creating the models and tables trees</li>
+<li>jQuery.layout<br/>
+For dividing the dashboard into resizable panels.</li>
+<li>jQuery.contextMenu<br/>
+For creating right-click pop-up menus.</li>
+</ul>
+
+</td><td style="width:5%"/></tr></table></body>
+</html>

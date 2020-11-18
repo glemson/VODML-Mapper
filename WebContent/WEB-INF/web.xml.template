@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0" >
+	
+
+<context-param>
+   <description>path to local area for user uploaded models</description> 
+  <param-name>models_path</param-name><param-value>models</param-value>
+</context-param>
+<context-param>
+   <description>path to local area for user uploaded models</description> 
+  <param-name>mongodb-host</param-name><param-value>localhost</param-value>
+</context-param>
+<context-param>
+   <description>path to local area for user uploaded models</description> 
+  <param-name>mongodb-port</param-name><param-value>27017</param-value>
+</context-param>
+<context-param>
+   <description>TBD</description> 
+  <param-name>mongodb-user</param-name><param-value>******</param-value>
+</context-param>
+<context-param>
+   <description>TBD</description> 
+  <param-name>mongodb-pwd</param-name><param-value>*******</param-value>
+</context-param>
+<context-param>
+   <description>path to local area for user uploaded models</description> 
+  <param-name>mongodb-database</param-name><param-value>*******</param-value>
+</context-param>
+
+	<servlet>
+    <servlet-name>modelLoader</servlet-name>
+    <!--servlet-class>de.mpg.mpa.uwsface.server.InputModelSrv</servlet-class-->
+    <servlet-class>net.ivoa.dm.vodml.mapper.VODMLMapperServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>modelLoader</servlet-name>
+    <url-pattern>/modelLoader</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>registry</servlet-name>
+    <!--servlet-class>de.mpg.mpa.uwsface.server.InputModelSrv</servlet-class-->
+    <servlet-class>net.ivoa.dm.vodml.mapper.RegistryServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>registry</servlet-name>
+    <url-pattern>/registry_private</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>registry</servlet-name>
+    <url-pattern>/registry</url-pattern>
+  </servlet-mapping>
+	<!-- default page to serve -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--   -->
+  
+  <security-role>
+    <description> VO-DML Mapper - role </description>
+    <role-name> vodml-mapper </role-name>
+  </security-role>
+  
+ <security-constraint>
+    <web-resource-collection>
+      <web-resource-name> 
+        Protected Site 
+      </web-resource-name>
+      <url-pattern> /registry_private </url-pattern>
+      <http-method> DELETE </http-method>
+      <http-method> GET </http-method>
+      <http-method> POST </http-method>
+      <http-method> PUT </http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name> vodml-mapper </role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method> BASIC </auth-method>
+  </login-config>
+  
+</web-app>

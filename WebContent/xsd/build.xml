@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="VO-DML-Mapper" default="xjc-all" basedir=".">
+
+	<property file="build.properties" />
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+	  <classpath>
+	    <fileset dir="${jaxb.dir}" includes="*.jar" />
+	  </classpath>
+	</taskdef>
+	<target name="echo">
+		<echo>${jaxb}</echo>
+		</target>
+	<target name="xjc-all">
+		<xjc schema="./vo-dml-v1.0.xsd" destdir="${jaxb}" package="org.ivoa.vodml.jaxb"/>
+		<xjc schema="./VO-DML_Mapper.xsd" destdir="${jaxb}" package="org.ivoa.vodml.mapper.jaxb"/>
+		<xjc schema="./vo-dml.models.xsd" destdir="${jaxb}" package="org.ivoa.vodml.jaxb"/>
+	    <xjc schema="./vo-dml.mapping.xsd" destdir="${jaxb}" package="org.ivoa.vodml.mapping.jaxb"/>
+	    <xjc schema="./VOTable-1.4_vodml.xsd" destdir="${jaxb}" package="org.ivoa.votable_1_4.jaxb"
+	      extension="true" binding="./votable_xjcConfig-1.4.xml"/>
+	    <xjc schema="./VOTable-1.3.xsd" destdir="${jaxb}" package="org.ivoa.votable.jaxb"
+	      extension="true" binding="./votable_xjcConfig-1.3.xml"/>
+	    <xjc schema="./vo-dml-instance.xsd" destdir="${jaxb}" package="org.ivoa.vodml.instance.jaxb"
+	      extension="true" binding="./vodmli_xjcConfig.xml"/>
+	    <xjc schema="./vo-dml-v1.0.xsd" destdir="${jaxb}" package="org.ivoa.vodml.jaxb"/>
+	</target>
+	
+	  <target name="xjc-reg" >
+	    <xjc schema="./vosi-v1.xml" destdir="${jaxb}" package="org.ivoa.registry.jaxb"
+	      extension="true"/><!-- binding="${jaxb}/vosi_xjcConfig.xml"/> -->
+	  </target>
+	
+	
+	<target name="validateVOTable" description="For testing an annotated VOTable file against the updated VOTable schema">
+		<schemavalidate file="${votable.file}" failonerror="false" >
+					<schema namespace="http://www.ivoa.net/xml/VOTable/v1.4_vodml" 
+								file="./VOTable-1.4_vodml.xsd"/>
+		    </schemavalidate>
+	</target>
+
+</project>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vo-dml:model xmlns:vo-dml="http://www.ivoa.net/xml/VODML/v1"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.ivoa.net/xml/VODML/v1 http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/xsd/vo-dml-v1.0.xsd">
+  <name>vo-dml</name>
+  <description>
+    This is a part of the VO-DML meta-model expressed as VO-DML.
+    More precisely, it introduces types and roles that can be used in describing a "mapping", 
+    to annotate data containers such as
+    VOTable, TAP_SCHEMA or FITS, to indicate the role that particular
+    mapping elements play in the mapping.
+    This model aims to represent the implicit types and roles that are not part of VO-DML itself, 
+    but may show up in instantiations of a VO-DML model, either direct or through mapping patterns.
+    Examples of those are identifiers on objecttype instances and various ways in which references
+    between objects can be represented, for example as foreign keys in the relational model.
+  </description>
+  <uri>https://wwwmpa.mpa-garching.mpg.de/svn/cosmo-group/Galformod/VO-DML/VODML-Mapper/WebContent/vo-dml/VO-DML.vo-dml.xml</uri>
+  <title>VO-DML Instantiation Meta-Model</title>
+  <version>0.x</version>
+  <lastModified>2013-02-18T06:17:55</lastModified>
+  <import>
+    <name>ivoa</name>
+    <url>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.vo-dml.xml</url>
+    <documentationURL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.html</documentationURL>
+  </import>
+  <dataType abstract="true">
+    <vodml-id>Value</vodml-id>
+    <name>Value</name>
+    <description>A value is an instance of a value type.
+    No statement is made here how this is to be represented. Really a serialization issue.
+    </description>
+  </dataType>
+
+  <dataType>
+    <vodml-id>Identifier</vodml-id>
+    <name>Identifier</name>
+    <description>This type represents an identifier as one or more string values, fields.</description>
+    <attribute>
+      <vodml-id>Identifier.PKFIELD</vodml-id>
+      <name>PKFIELD</name>
+      <description>.... </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>-1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </dataType>
+
+
+  <objectType>
+    <vodml-id>Model</vodml-id>
+    <name>Model</name>
+    <description>
+      This type represents a usage of a data model spec in a serialisation, i.e. a model instance.
+      It has attributes allowing lookup of the actual spec, assigning a prefix to
+      refer to elements from the model using utypes (if different from the
+      model's name.)
+      And it has an (implicit) collection of (root) instances.
+    </description>
+    <attribute>
+      <vodml-id>Model.url</vodml-id>
+      <name>url</name>
+      <description>URL from which the VO-DML/XML representation of the model can be retrieved.</description>
+      <datatype>
+        <vodml-ref>ivoa:anyURI</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Model.name</vodml-id>
+      <name>name</name>
+      <description>The (short) name of the model.
+        Used as prefix in UTYPE expressions pointing at elements in the model.
+      </description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <composition>
+      <vodml-id>Model.type</vodml-id>
+      <name>type</name>
+      <description>...</description>
+      <datatype>
+        <vodml-ref>vo-dml:Type</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>-1</maxOccurs>
+      </multiplicity>
+    </composition>
+  </objectType>
+
+  <objectType abstract="true">
+    <vodml-id>ModelElement</vodml-id>
+    <name>ModelElement</name>
+    <description>
+      This type represents a generic VO-DML model element.
+    </description>
+    <attribute>
+      <vodml-id>ModelElement.vodmlid</vodml-id>
+      <name>vodmlid</name>
+      <description>The unique identifier of this model element.</description>
+      <datatype>
+        <!-- TODO Should be a properly structured type -->
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType abstract="true">
+    <vodml-id>Type</vodml-id>
+    <name>Type</name>
+    <description>
+      This type represents a VO-DML Type as a set of instances.
+    </description>
+    <extends>
+      <vodml-ref>vo-dml:ModelElement</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>Type.name</vodml-id>
+      <name>name</name>
+      <description>The name of the type.</description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <attribute>
+      <vodml-id>Type.description</vodml-id>
+      <name>description</name>
+      <description>The description of the type.</description>
+      <datatype>
+        <vodml-ref>ivoa:string</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <composition>
+      <vodml-id>Type.instance</vodml-id>
+      <name>instance</name>
+      <description>The collection of instances of the Type.</description>
+      <datatype>
+        <vodml-ref>vo-dml:Instance</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>-1</maxOccurs>
+      </multiplicity>
+    </composition>
+    <reference>
+      <vodml-id>Type.inheritsFrom</vodml-id>
+      <name>inheritsFrom</name>
+      <description>
+        A reference to a super-Type. Represents a usual is-a interpretation on inheritance, onlny single inheritance is supported in VO-DML.
+      </description>
+      <datatype>
+        <vodml-ref>vo-dml:Type</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+  </objectType>
+
+  <objectType abstract="true">
+    <vodml-id>ObjectType</vodml-id>
+    <name>ObjectType</name>
+    <description>
+      This type represents a VO-DML ObjectType as a set of instances (objects).
+    </description>
+    <extends>
+      <vodml-ref>vo-dml:Type</vodml-ref>
+    </extends>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>vo-dml:Type.instance</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>vo-dml:ObjectInstance</vodml-ref>
+      </datatype>
+    </constraint>
+  </objectType>
+
+  <objectType abstract="true">
+    <vodml-id>DataType</vodml-id>
+    <name>DataType</name>
+    <description>
+      This type represents a VO-DML Data Type as a set of values (objects).
+    </description>
+    <extends>
+      <vodml-ref>vo-dml:Type</vodml-ref>
+    </extends>
+    <constraint xsi:type="vo-dml:SubsettedRole">
+      <role>
+        <vodml-ref>vo-dml:Type.instance</vodml-ref>
+      </role>
+      <datatype>
+        <vodml-ref>vo-dml:ValueInstance</vodml-ref>
+      </datatype>
+    </constraint>
+  </objectType>
+
+  <objectType abstract="true">
+    <vodml-id>Instance</vodml-id>
+    <name>Instance</name>
+    <description>Represents a generic instance of a Type.</description>
+<!-- 
+    <attribute>
+      <vodml-id>Instance.type</vodml-id>
+      <name>type</name>
+      <description>The utype of the Type of this Instance. 
+      NB not modeled as a reference as this would cause a cycle in this model.
+      </description>
+      <datatype><vodml-ref>ivoa:string</vodml-ref></datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+ -->    
+  </objectType>
+
+  <objectType>
+    <vodml-id>ObjectInstance</vodml-id>
+    <name>ObjectInstance</name>
+    <description>This represents instances of object types in serialisations.</description>
+    <extends>
+      <vodml-ref>vo-dml:Instance</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>ObjectInstance.PRIMARYKEY</vodml-id>
+      <name>PRIMARYKEY</name>
+      <description>Identifier of an Object</description>
+      <datatype>
+        <vodml-ref>vo-dml:Identifier</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <reference>
+      <vodml-id>ObjectInstance.CONTAINER</vodml-id>
+      <name>CONTAINER</name>
+      <description>Reference to an instance that contains this instance.</description>
+      <datatype>
+        <vodml-ref>vo-dml:ObjectInstance</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+    <reference>
+      <vodml-id>ObjectInstance.SAMEINSTANCE</vodml-id>
+      <name>SAMEINSTANCE</name>
+      <description>Reference to an instance that is the same as this instance. 
+      This allows one to indicate that an instance is stored over multiple tables. 
+      It MUST NOT be used for any other type of instantiation. I.e. NOT template-to-global or vice versa.
+      It MUST/SHOULD be implemented using an ORMReference. 
+      Only one of the INSTANCE-s bound by one or more SAMEINSTANCE references should point to a container oif that exists.
+      IN general one should not have redundant ROLE mappings.      
+      </description>
+      <datatype>
+        <vodml-ref>vo-dml:ObjectInstance</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+  </objectType>
+
+  <objectType>
+    <vodml-id>ValueInstance</vodml-id>
+    <name>ValueInstance</name>
+    <description>Represents a value as an instance of a ValueType,
+    compared to the actual value (here represented using an attribute), this type defines extra metadata
+    </description>
+    <extends>
+      <vodml-ref>vo-dml:Instance</vodml-ref>
+    </extends>
+    <attribute>
+      <vodml-id>ValueInstance.value</vodml-id>
+      <name>value</name>
+      <description>The actual value represented by this ValueInstance</description>
+      <datatype><vodml-ref>vo-dml:Value</vodml-ref></datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+  <objectType>
+    <vodml-id>Collection</vodml-id>
+    <name>Collection</name>
+    <description>Represents a collection</description>
+    <composition>
+    <vodml-id>Collection.item</vodml-id>
+    <name>item</name>
+    <description>...</description>
+    <datatype><vodml-ref>vo-dml:CollectionItem</vodml-ref></datatype>
+    <multiplicity>
+    <minOccurs>0</minOccurs>
+    <maxOccurs>-1</maxOccurs>
+    </multiplicity>
+    </composition>
+  </objectType>
+
+  <objectType>
+  <vodml-id>CollectionItem</vodml-id>
+    <name>CollectionItem</name>
+    <description>Represents an item in a collection</description>
+    <reference>
+    <vodml-id>CollectionItem.instance</vodml-id>
+    <name>instance</name>
+    <description>...</description>
+    <datatype><vodml-ref>vo-dml:ObjectInstance</vodml-ref></datatype>
+    <multiplicity>
+    <minOccurs>1</minOccurs>
+    <maxOccurs>1</maxOccurs>
+    </multiplicity>
+    </reference>
+  </objectType>
+
+  <objectType>
+    <vodml-id>ORMReference</vodml-id>
+    <name>ORMReference</name>
+    <description>This type represents a (lazy) reference to another object.
+      It represents the referenced object by wrapping its identifier.
+      Is able to provide explicit information on the type of the reference object,
+      so that this does not have to be inferred
+      from the reference.
+    </description>
+    <attribute>
+      <vodml-id>ORMReference.FOREIGNKEY</vodml-id>
+      <name>FOREIGNKEY</name>
+      <description>The ID of the referenced object.</description>
+      <datatype>
+        <vodml-ref>vo-dml:Identifier</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+    <reference>
+      <vodml-id>ORMReference.TARGET</vodml-id>
+      <name>TARGET</name>
+      <description>Reference to collection of objects, represented by the (Object)Type of these objects, that is supposed to contain
+        reference object. If no explicit reference is set, it is up to the context to decide where a client should
+        look for the
+        objects for the given id.
+      </description>
+      <datatype>
+        <vodml-ref>vo-dml:ObjectInstance</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>0</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </reference>
+  </objectType>
+
+  <objectType>
+    <vodml-id>RemoteReference</vodml-id>
+    <name>RemoteReference</name>
+    <description>This type represents a (lazy) reference to a remote object.
+    </description>
+    <attribute>
+      <vodml-id>RemoteReference.url</vodml-id>
+      <name>url</name>
+      <description>The URL of the referenced object which is assumed ot be in a remote document.</description>
+      <datatype>
+        <vodml-ref>ivoa:anyURI</vodml-ref>
+      </datatype>
+      <multiplicity>
+        <minOccurs>1</minOccurs>
+        <maxOccurs>1</maxOccurs>
+      </multiplicity>
+    </attribute>
+  </objectType>
+
+</vo-dml:model>

@@ -1,0 +1,37 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://www.ivoa.net/xml/VODML/v1" 
+  xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" 
+  targetNamespace="http://www.ivoa.net/xml/VODML/v1"
+  attributeFormDefault="unqualified" elementFormDefault="unqualified">
+
+<!--   <xsd:include schemaLocation="http://ivoa.net/xml/VODML/vo-dml-v1.xsd"/> -->
+   <xsd:include schemaLocation="http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/xsd/vo-dml-v1.0.xsd"/> 
+  <xsd:annotation>
+    <xsd:documentation>
+      This schema defines the "vo-urp meta model", a modeling language used to define the concepts
+      and structures that describe data models. It is proposed as the common language for
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="Models">
+    <xsd:sequence>
+      <xsd:element name="modellocation" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="location" type="xsd:anyURI" />
+            <xsd:element name="documentationURL" type="xsd:anyURI" minOccurs="0"/>
+            <xsd:element name="model" type="Model" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="models" type="Models">
+    <xsd:annotation>
+      <xsd:documentation>
+        Every VO-DML/XML document must start with a 'model' element, no other root elements are supported by this spec.
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

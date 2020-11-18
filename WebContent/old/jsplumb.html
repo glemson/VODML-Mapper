@@ -1,0 +1,98 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.jsPlumb-1.4.1-all.js"></script>
+<script type="text/javascript">
+        function AddDiv() {
+            var obj = new Date();
+            var Div = $('<div>', { id: "X" + obj.getSeconds() }, { class: 'window' }).css({ height: '100px', width: '100px', border: 'solid 1px' }).appendTo('body');
+            jsPlumb.addEndpoint($(Div), targetEndpoint);
+            jsPlumb.addEndpoint($(Div), sourceEndpoint);
+            jsPlumb.draggable($(Div));
+            $(Div).addClass('window');
+        }
+        var a = $("#a");
+        var b = $("#b");
+
+        //Setting up drop options
+        var targetDropOptions = {
+            activeClass: 'dragActive'
+        };
+
+        //Setting up a Target endPoint
+        var targetColor = "#316b31";
+        var targetEndpoint = {
+            anchor: "TopCenter", //Placement of Dot
+            endpoint: ["Dot", { radius: 8}], //Other types are rectangle, Image, Blank, Triangle
+            paintStyle: { fillStyle: targetColor }, //Line color
+            isSource: true, //Starting point of the connector
+            scope: "green dot",
+            connectorStyle: { strokeStyle: targetColor, lineWidth: 8 }, // Means Bridge width and bridge color
+            connector: ["Flowchart", { curviness: 63}], //Other properties Bezier
+            maxConnections: -1, //No upper limit
+            isTarget: true, //Means same color is allowed to accept the connection
+            dropOptions: targetDropOptions //Means when the drag is started, other terminals will start to highlight
+        };
+
+        //Setting up a Source endPoint
+        var sourceColor = "#ff9696";
+        var sourceEndpoint = {
+            anchor: "BottomCenter",
+            endpoint: ["Dot", { radius: 8}],
+            paintStyle: { fillStyle: sourceColor },
+            isSource: true,
+            scope: "green dot",
+            connectorStyle: { strokeStyle: sourceColor, lineWidth: 8 },
+            connector: ["Bezier", { curviness: 63}],
+            maxConnections: -1,
+            isTarget: true,
+            dropOptions: targetDropOptions
+        };
+
+        jsPlumb.bind("ready", function () {
+
+            //Set up endpoints on the divs
+            jsPlumb.addEndpoint($(".window"), targetEndpoint);
+            jsPlumb.addEndpoint($(".window"), sourceEndpoint);
+
+            jsPlumb.draggable($(".window"));
+            jsPlumb.animate($("#a"), { "left": 50, "top": 100 }, { duration: "slow" });
+        });
+
+    </script>
+    <style type="text/css">
+.window
+        {
+            background-color: white;
+            border: 3px solid #346789;
+            color: black;
+            font-family: helvetica;
+            font-size: 0.8em;
+            height: 12em;
+            opacity: 0.8;
+            padding: 0.5em;
+            position: absolute;
+            width: 14em;
+            z-index: 20;
+            text-align: center;
+        }
+        
+        .dragActive
+        {
+            border: 10px solid red;
+        }    
+    </style>
+</head>
+<body>
+    
+     <button id="aDD" name="addCOlumn" onclick="AddDiv();"  value="Add New Div">Add New Column</button>
+    <div>
+        <div id="a" class="a window" style="width: 100px; height: 100px; border: solid 1px">
+        </div>
+        <br>
+        <div id="b" class="b window" style="width: 100px; height: 100px; border: solid 1px;">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+#splashscreen {
+	background: url(./images/ajax-loader-big.gif) no-repeat ;
+	background-size: 300px Auto;
+	background-position:center;
+}
+.splashScreenWindow .ui-dialog-titlebar {
+    display: none;
+}
+.ui-dialog {
+    zIndex:1000000 !important; /* The default is 100. !important overrides the default. */
+    /* necessary  to keep loading dialogue above jsplumb components */
+}
+.context-menu {
+	background: #D2E0E6;
+	padding: 3px;
+}
+
+tr, li {
+  cursor:pointer;
+}
+
+div.rootnode {
+	position: absolute;
+  font-family: 'Andale Mono', sans-serif;
+/*  border: 2px solid black; */
+  width:25em; /* todo, find way to scale this automatically with width of inner table */
+  z-index:2;
+  cursor:pointer;
+}
+
+div.tableNode {
+	background: white;
+	color: black;
+}
+
+table.node {
+  border: 2px solid black; 
+	position: relative;
+  width:100%;
+  border-collapse:collapse;
+  margin:0;
+  padding:0;
+}
+div.collapsed {
+  border: 2px solid red;
+}
+table.objectType {
+		background: #D2E0E6; 
+		color: #528CE0;
+}
+table.dataType {
+	background: #FFA8A8; 
+  color: #802828;
+}
+table.primitiveType {
+	background: #FFFF99; 
+  color: black;
+}
+table.enumeration {
+	background: #FFFF99; 
+  color: black;
+}
+table.nodeHeader {
+	position: relative;
+  width:100%;
+}
+tr.title { /* to distinguish title rows form role rows (for collapse and expand) */
+	position: relative;
+  border: 2px solid black;
+  width:100%;
+}
+tr.role {
+	position: relative;
+  border: 2px solid black;
+  width:100%;
+}
+tr.param {
+	position: relative;
+  border: 2px solid black;
+  width:100%;
+  background:#FFFF99;
+}
+td.titleNode {
+	position: relative;
+  font-size: 1em;
+  font-weight:bold;
+  width:100%;
+  height:1.5em;
+  line-height:1.5em;
+  text-align:center;
+  vertical-align:middle;
+}
+td.role {
+  font-size: 1em;
+  width:100%;
+  border: 1px solid black;
+}
+td.sourceendpoint {
+  align:right;
+  vertical-align:middle;
+  border: 1px solid black;
+}
+td.targetendpoint {
+  text-align:left;
+  vertical-align:middle;
+  border: 1px solid black;
+}
+div.endpoint {
+  width:24px;
+  height:26px;
+  padding:0;
+  margin:0px;
+/*  border:3px solid blue; */
+  position:relative;
+}
+
+
+
+
+/*  jsplumb specific settings */
+.mapper { z-index:20; }
+._jsPlumb_endpoint { z-index:2; }/* otherwise endpoint on top of second panels */
+._jsPlumb_connector { z-index:2; }
+._jsPlumb_overlay { z-index:1; }
+
+.context-menu {
+	background: #D2E0E6;
+	padding: 3px;
+	border: 2px solid black;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}

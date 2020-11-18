@@ -1,0 +1,19 @@
+
+# see: https://medium.com/@matteocontrini/how-to-setup-auth-in-mongodb-3-0-properly-86b60aeef7e8
+
+# start mongod with authentication disabled
+> use admin
+
+> db.createUser(
+{
+ user:"admin",
+ pwd:"*****",
+ roles:[{role:"root",db:"admin"}]
+ }
+)
+ # stop mongod, restart with authentication enabled
+ > use admin
+ > db.auth("admin","*****")
+ 
+> use vodmlmapper
+> db.createUser({user:"vodmlmapper",pwd:"3f84yeqwilneik3wcenqwa",roles:[{role:"dbOwner",db:"vodmlmapper"}]})

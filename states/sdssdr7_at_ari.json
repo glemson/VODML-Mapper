@@ -1,0 +1,1090 @@
+{
+	"_id": {
+		"$oid": "52d2c793244e030bde0b6834"
+	},
+	"tables": {
+		"VizieR": [],
+		"VOTABLEs": [],
+		"TAP": [
+			{
+				"schemas": [
+					"sdssdr7"
+				],
+				"endpoint": "http://dc.zah.uni-heidelberg.de/__system__/tap/run/tap"
+			}
+		]
+	},
+	"models": [
+		{
+			"name": "ivoa",
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/IVOA.vo-dml.xml"
+		},
+		{
+			"name": "photdm-alt",
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/PhotDM-alt.vo-dml.xml"
+		},
+		{
+			"name": "src",
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/SourceDM.vo-dml.xml"
+		},
+		{
+			"name": "vo-dml",
+			"url": "http://localhost:8080/VODML-Mapper/vo-dml/VO-DML.vo-dml.xml"
+		}
+	],
+	"stateId": "T1389544637995",
+	"counter": 236,
+	"mapper": {
+		"tables": [
+			{
+				"position": {
+					"left": 1238,
+					"top": 816
+				},
+				"id": "T1389544637995_1",
+				"source": {
+					"id": "http://dc.zah.uni-heidelberg.de/__system__/tap/run/tap#sdssdr7.sources",
+					"schema_name": "sdssdr7",
+					"description": "\nThis is the result of the query::\n\n\tselect top 2000\n\t\tobjID, field.run, field.rerun, field.camcol, field.fieldId,\n\t\tobj, ra, dec, raErr, decErr, raDecCorr,\n\t\toffsetRa_u, offsetRa_g, offsetRa_r, offsetRa_i, offsetRa_z,\n\t\toffsetDec_u, offsetDec_g, offsetDec_r, offsetDec_i, offsetDec_z,\n\t\tu, g, r, i, z, err_u, err_g, err_r, err_i, err_z,\n\t\tmjd_u, mjd_g, mjd_r, mjd_i, mjd_z\n\tfrom\n\t\tPhotoObjAll\n\tjoin\n\t\tfield\n\ton (field.fieldId=PhotoObjAll.fieldId)\n\non SDSS DR7, kindly provided by the Potsdam mirror.  All angular\nquantities are given in degrees here.",
+					"name": "sdssdr7.sources",
+					"type": "TAP_TABLE",
+					"tap_endpoint": "http://dc.zah.uni-heidelberg.de/__system__/tap/run/tap"
+				}
+			}
+		],
+		"maps": [
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "objid",
+					"column": {
+						"rank": 0,
+						"description": "Unique SDSS identifier composed from [skyVersion,rerun,run,camcol,field,obj].",
+						"name": "objid",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "ID",
+						"datatype": "vo-dml:Identifier",
+						"utype": "vo-dml:Object.ID"
+					},
+					"utype": "vo-dml:Object.ID"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_52",
+					"type": {
+						"vodmltype": "dataType",
+						"utype": "src:source.SkyCoordinate"
+					},
+					"utype": "src:source.SkyCoordinate"
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "position",
+						"datatype": "src:source.SkyCoordinate",
+						"utype": "src:source.Source.position"
+					},
+					"utype": "src:source.Source.position"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "ra",
+					"column": {
+						"rank": 6,
+						"description": "J2000 right ascension (r')",
+						"name": "ra",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_52",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "longitude",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.SkyCoordinate.longitude"
+					},
+					"utype": "src:source.SkyCoordinate.longitude"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "dec",
+					"column": {
+						"rank": 7,
+						"description": "J2000 declination (r')",
+						"name": "dec",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_52",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "latitude",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.SkyCoordinate.latitude"
+					},
+					"utype": "src:source.SkyCoordinate.latitude"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_62",
+					"type": {
+						"vodmltype": "dataType",
+						"utype": "src:source.AlignedEllipse"
+					},
+					"utype": "src:source.AlignedEllipse"
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "positionError",
+						"datatype": "src:source.SkyError",
+						"utype": "src:source.Source.positionError"
+					},
+					"utype": "src:source.Source.positionError"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "raerr",
+					"column": {
+						"rank": 8,
+						"description": "Error in RA",
+						"name": "raerr",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "primitiveType",
+					"objectId": "T1389544637995_62",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "longError",
+						"datatype": "ivoa:real",
+						"utype": "src:source.AlignedEllipse.longError"
+					},
+					"utype": "src:source.AlignedEllipse.longError"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "decerr",
+					"column": {
+						"rank": 9,
+						"description": "Error in Dec",
+						"name": "decerr",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "primitiveType",
+					"objectId": "T1389544637995_62",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "latError",
+						"datatype": "ivoa:real",
+						"utype": "src:source.AlignedEllipse.latError"
+					},
+					"utype": "src:source.AlignedEllipse.latError"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_67",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"utype": "src:source.LuminosityMeasurement"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"utype": "src:source.Source.luminosity"
+					},
+					"utype": "src:source.Source.luminosity"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "u",
+					"column": {
+						"rank": 13,
+						"description": "Magnitude in u band, better of deVaucouleurs and exponential fits",
+						"name": "u",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_67",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.value"
+					},
+					"utype": "src:source.LuminosityMeasurement.value"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "err_u",
+					"column": {
+						"rank": 14,
+						"description": "Error in corresponding magnitude",
+						"name": "err_u",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_67",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "error",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.error"
+					},
+					"utype": "src:source.LuminosityMeasurement.error"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_79",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_97",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "photometryFilter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+					},
+					"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_79",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_67",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "src:source.LuminosityMeasurement.filter"
+					},
+					"utype": "src:source.LuminosityMeasurement.filter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_106",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.SkyCoordinateFrame"
+					},
+					"utype": "src:source.SkyCoordinateFrame"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_52",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "frame",
+						"datatype": "src:source.SkyCoordinateFrame",
+						"utype": "src:source.SkyCoordinate.frame"
+					},
+					"utype": "src:source.SkyCoordinate.frame"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_116",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"utype": "src:source.LuminosityMeasurement"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"utype": "src:source.Source.luminosity"
+					},
+					"utype": "src:source.Source.luminosity"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_128",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_97",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "photometryFilter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+					},
+					"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_128",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_116",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "src:source.LuminosityMeasurement.filter"
+					},
+					"utype": "src:source.LuminosityMeasurement.filter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "g",
+					"column": {
+						"rank": 18,
+						"description": "Magnitude in g band, better of deVaucouleurs and exponential fits",
+						"name": "g",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_116",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.value"
+					},
+					"utype": "src:source.LuminosityMeasurement.value"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "err_g",
+					"column": {
+						"rank": 19,
+						"description": "Error in corresponding magnitude",
+						"name": "err_g",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_116",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "error",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.error"
+					},
+					"utype": "src:source.LuminosityMeasurement.error"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_146",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"utype": "src:source.LuminosityMeasurement"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"utype": "src:source.Source.luminosity"
+					},
+					"utype": "src:source.Source.luminosity"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "r",
+					"column": {
+						"rank": 23,
+						"description": "Magnitude in r band, better of deVaucouleurs and exponential fits",
+						"name": "r",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_146",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.value"
+					},
+					"utype": "src:source.LuminosityMeasurement.value"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "err_r",
+					"column": {
+						"rank": 24,
+						"description": "Error in corresponding magnitude",
+						"name": "err_r",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_146",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "error",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.error"
+					},
+					"utype": "src:source.LuminosityMeasurement.error"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_158",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_146",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "src:source.LuminosityMeasurement.filter"
+					},
+					"utype": "src:source.LuminosityMeasurement.filter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_158",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_97",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "photometryFilter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+					},
+					"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_188",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_176",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "src:source.LuminosityMeasurement.filter"
+					},
+					"utype": "src:source.LuminosityMeasurement.filter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_188",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_97",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "photometryFilter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+					},
+					"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_176",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"utype": "src:source.LuminosityMeasurement"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"utype": "src:source.Source.luminosity"
+					},
+					"utype": "src:source.Source.luminosity"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "i",
+					"column": {
+						"rank": 28,
+						"description": "Magnitude in i band, better of deVaucouleurs and exponential fits",
+						"name": "i",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_176",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.value"
+					},
+					"utype": "src:source.LuminosityMeasurement.value"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "err_i",
+					"column": {
+						"rank": 29,
+						"description": "Error in corresponding magnitude",
+						"name": "err_i",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_176",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "error",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.error"
+					},
+					"utype": "src:source.LuminosityMeasurement.error"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_218",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "reference",
+					"objectId": "T1389544637995_206",
+					"role": {
+						"rank": 0,
+						"vodmltype": "reference",
+						"name": "filter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "src:source.LuminosityMeasurement.filter"
+					},
+					"utype": "src:source.LuminosityMeasurement.filter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_218",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "photdm-alt:PhotometryFilter"
+					},
+					"utype": "photdm-alt:PhotometryFilter"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_97",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "photometryFilter",
+						"datatype": "photdm-alt:PhotometryFilter",
+						"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+					},
+					"utype": "photdm-alt:PhotometricSystem.photometryFilter"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_206",
+					"type": {
+						"vodmltype": "objectType",
+						"utype": "src:source.LuminosityMeasurement"
+					},
+					"utype": "src:source.LuminosityMeasurement"
+				},
+				"from": {
+					"connectorType": "collection",
+					"objectId": "T1389544637995_39",
+					"role": {
+						"rank": 0,
+						"vodmltype": "collection",
+						"name": "luminosity",
+						"datatype": "src:source.LuminosityMeasurement",
+						"utype": "src:source.Source.luminosity"
+					},
+					"utype": "src:source.Source.luminosity"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "z",
+					"column": {
+						"rank": 33,
+						"description": "Magnitude in z band, better of deVaucouleurs and exponential fits",
+						"name": "z",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_206",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "value",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.value"
+					},
+					"utype": "src:source.LuminosityMeasurement.value"
+				}
+			},
+			{
+				"to": {
+					"connectorType": "tableColumn",
+					"tableId": "T1389544637995_1",
+					"name": "err_z",
+					"column": {
+						"rank": 34,
+						"description": "Error in corresponding magnitude",
+						"name": "err_z",
+						"datatype": null,
+						"xmlid": null
+					}
+				},
+				"from": {
+					"connectorType": "dataType",
+					"objectId": "T1389544637995_206",
+					"role": {
+						"rank": 0,
+						"vodmltype": "attribute",
+						"name": "error",
+						"datatype": "ivoa:quantity.RealQuantity",
+						"utype": "src:source.LuminosityMeasurement.error"
+					},
+					"utype": "src:source.LuminosityMeasurement.error"
+				}
+			}
+		],
+		"objects": [
+			{
+				"position": {
+					"left": 48,
+					"top": 31
+				},
+				"id": "T1389544637995_39",
+				"vodmltype": "objectType",
+				"literals": [],
+				"utype": "src:source.Source",
+				"collapsed": false
+			},
+			{
+				"position": {
+					"left": 488,
+					"top": 10
+				},
+				"id": "T1389544637995_52",
+				"vodmltype": "dataType",
+				"literals": [],
+				"utype": "src:source.SkyCoordinate",
+				"collapsed": false
+			},
+			{
+				"position": {
+					"left": 524,
+					"top": 240
+				},
+				"id": "T1389544637995_62",
+				"vodmltype": "dataType",
+				"literals": [],
+				"utype": "src:source.AlignedEllipse",
+				"collapsed": false
+			},
+			{
+				"position": {
+					"left": 463,
+					"top": 395
+				},
+				"id": "T1389544637995_67",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "magnitude",
+						"utype": "src:source.LuminosityMeasurement.type"
+					}
+				],
+				"utype": "src:source.LuminosityMeasurement",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 438,
+					"top": 622
+				},
+				"id": "T1389544637995_79",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "sdss_u",
+						"utype": "photdm-alt:PhotometryFilter.bandName"
+					}
+				],
+				"utype": "photdm-alt:PhotometryFilter",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 10,
+					"top": 839
+				},
+				"id": "T1389544637995_97",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "The SDSS magnitude system",
+						"utype": "photdm-alt:PhotometricSystem.description"
+					}
+				],
+				"utype": "photdm-alt:PhotometricSystem",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 981,
+					"top": 46
+				},
+				"id": "T1389544637995_106",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "ICRS",
+						"utype": "src:source.SkyCoordinateFrame.name"
+					}
+				],
+				"utype": "src:source.SkyCoordinateFrame",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 471,
+					"top": 734
+				},
+				"id": "T1389544637995_116",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "magnitude",
+						"utype": "src:source.LuminosityMeasurement.type"
+					}
+				],
+				"utype": "src:source.LuminosityMeasurement",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 454,
+					"top": 928
+				},
+				"id": "T1389544637995_128",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "sdss_g",
+						"utype": "photdm-alt:PhotometryFilter.bandName"
+					}
+				],
+				"utype": "photdm-alt:PhotometryFilter",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 536,
+					"top": 1048
+				},
+				"id": "T1389544637995_146",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "magnitude",
+						"utype": "src:source.LuminosityMeasurement.type"
+					}
+				],
+				"utype": "src:source.LuminosityMeasurement",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 449,
+					"top": 1271
+				},
+				"id": "T1389544637995_158",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "sdss_r",
+						"utype": "photdm-alt:PhotometryFilter.bandName"
+					}
+				],
+				"utype": "photdm-alt:PhotometryFilter",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 485,
+					"top": 1397
+				},
+				"id": "T1389544637995_176",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "magnitude",
+						"utype": "src:source.LuminosityMeasurement.type"
+					}
+				],
+				"utype": "src:source.LuminosityMeasurement",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 487,
+					"top": 1623
+				},
+				"id": "T1389544637995_188",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "sdss_i",
+						"utype": "photdm-alt:PhotometryFilter.bandName"
+					}
+				],
+				"utype": "photdm-alt:PhotometryFilter",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 467,
+					"top": 1772
+				},
+				"id": "T1389544637995_206",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "magnitude",
+						"utype": "src:source.LuminosityMeasurement.type"
+					}
+				],
+				"utype": "src:source.LuminosityMeasurement",
+				"collapsed": true
+			},
+			{
+				"position": {
+					"left": 451,
+					"top": 2047
+				},
+				"id": "T1389544637995_218",
+				"vodmltype": "objectType",
+				"literals": [
+					{
+						"value": "sdss_z",
+						"utype": "photdm-alt:PhotometryFilter.bandName"
+					}
+				],
+				"utype": "photdm-alt:PhotometryFilter",
+				"collapsed": true
+			}
+		]
+	},
+	"label": "20140112-114923.023"
+}

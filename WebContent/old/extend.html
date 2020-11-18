@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+Person = function(id, name, age){
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    alert('A new person has been accepted');
+}
+
+Person.prototype = {
+    /** wake person up */
+    wake_up: function() {
+        alert('I am awake');
+    },
+
+    /** retrieve person's age */
+    get_age: function() {
+        return this.age;
+    }
+}
+
+Inheritance_Manager = {};
+
+Inheritance_Manager.extend = function(subClass, baseClass) {
+    function inheritance() { }
+    inheritance.prototype = baseClass.prototype;
+    subClass.prototype = new inheritance();
+    subClass.prototype.constructor = subClass;
+    subClass.baseConstructor = baseClass;
+    subClass.superClass = baseClass.prototype;
+}
+
+Manager = function(id, name, age, salary) {
+    Manager.baseConstructor.call(this, id, name, age);
+    this.salary = salary;
+    alert('A manager has been registered.');
+}
+
+Inheritance_Manager.extend(Manager, Person);
+
+Manager.prototype.lead = function(){
+   alert('I am a good leader');
+}
+
+var p = new Person(1, 'Joe Tester', 26);
+var pm = new Manager(1, 'Joe Tester', 26, '20.000');
+
+VODMLType = function(name, id, model)
+{
+	this.model = model;
+	this.name = name;
+	this.vodmlid = id;
+};
+VODMLType.prototype = {
+		test_alert:function(){
+			alert("I am a VODMLType");
+		}
+};
+ObjectType = function(name, id,model){
+	ObjectType.baseConstructor.call(this,name, id,model);
+};
+Inheritance_Manager.extend(ObjectType, VODMLType);
+
+var ot = new ObjectType("foo","bar",null);
+ot.test_alert();
+</script>
+</body>
+</html>

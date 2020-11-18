@@ -1,0 +1,1067 @@
+<VOTABLE
+    xmlns="http://www.ivoa.net/xml/VOTable/v1.4_vodml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.4_vodml http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/xsd/ext/VOTable-1.4_vodml.xsd">
+    <VODML>
+        <MODEL>
+            <NAME>ivoa</NAME>
+            <URL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/models/ivoa/vo-dml/IVOA-v1.0.vo-dml.xml</URL>
+        </MODEL>
+        <MODEL>
+            <NAME>caom2</NAME>
+            <URL>http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/models/caom2/cadc/CAOM2.vo-dml.v1.xml</URL>
+        </MODEL>
+        <TEMPLATES tableref="T1526644375722_252">
+            <INSTANCE dmtype="caom2:Observation" ID="T1526644375722_205">
+                <PRIMARYKEY>
+                    <PKFIELD>
+                        <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F22"/>
+                    </PKFIELD>
+                </PRIMARYKEY>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.maxLastModified">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_252_F39"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.lastModified">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_252_F38"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.sequenceNumber">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_252_F1"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.metaRelease">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_252_F28"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.type">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F26"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.observationID">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F24"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.accMetaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_252_F21"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.metaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_252_F20"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.collection">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F23"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Observation.intent">
+                    <COLUMN dmtype="caom2:ObservationIntentType" ref="T1526644375722_252_F27"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.id">
+                    <COLUMN dmtype="caom2:uuid" ref="T1526644375722_252_F22"/>
+                </ATTRIBUTE>
+                <COMPOSITION dmrole="caom2:Observation.target">
+                    <INSTANCE dmtype="caom2:Target" ID="T1526644375722_335">
+                        <ATTRIBUTE dmrole="caom2:Target.name">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F33"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Target.type">
+                            <COLUMN dmtype="caom2:TargetType" ref="T1526644375722_252_F34"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Target.redshift">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F4"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Target.standard">
+                            <COLUMN dmtype="ivoa:boolean" ref="T1526644375722_252_F3"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Target.moving">
+                            <COLUMN dmtype="ivoa:boolean" ref="T1526644375722_252_F5"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Target.keywords">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F6"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Observation.environment">
+                    <INSTANCE dmtype="caom2:Environment" ID="T1526644375722_662">
+                        <ATTRIBUTE dmrole="caom2:Environment.humidity">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F13"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Environment.elevation">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F14"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Environment.tau">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F15"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Environment.wavelengthTau">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F16"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Environment.ambientTemp">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F17"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Environment.photometric">
+                            <COLUMN dmtype="ivoa:boolean" ref="T1526644375722_252_F18"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Observation.telescope">
+                    <INSTANCE dmtype="caom2:Telescope" ID="T1526644375722_687">
+                        <ATTRIBUTE dmrole="caom2:Telescope.geoLocationX">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F7"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Telescope.geoLocationY">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F8"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Telescope.geoLocationZ">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_252_F9"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Telescope.keywords">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F10"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Telescope.name">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F35"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Observation.instrument">
+                    <INSTANCE dmtype="caom2:Instrument" ID="T1526644375722_708">
+                        <ATTRIBUTE dmrole="caom2:Instrument.keywords">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F11"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Instrument.name">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F37"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Observation.Proposal">
+                    <INSTANCE dmtype="caom2:Proposal" ID="T1526644375722_723">
+                        <ATTRIBUTE dmrole="caom2:Proposal.proposalID">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F29"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Proposal.pi">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F30"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Proposal.project">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F31"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Proposal.title">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F32"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Proposal.keywords">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_252_F2"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Observation.requirements">
+                    <INSTANCE dmtype="caom2:Requirements" ID="T1526644375722_744">
+                        <ATTRIBUTE dmrole="caom2:Requirements.flag">
+                            <COLUMN dmtype="caom2:Status" ref="T1526644375722_252_F36"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+            </INSTANCE>
+        </TEMPLATES>
+        <TEMPLATES tableref="T1526644375722_1151">
+            <INSTANCE dmtype="caom2:Plane" ID="T1526644375722_156">
+                <PRIMARYKEY>
+                    <PKFIELD>
+                        <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F43"/>
+                    </PKFIELD>
+                </PRIMARYKEY>
+                <CONTAINER>
+                    <FOREIGNKEY>
+                        <PKFIELD>
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F3"/>
+                        </PKFIELD>
+                        <TARGETID>T1526644375722_205</TARGETID>
+                    </FOREIGNKEY>
+                </CONTAINER>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.lastModified">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_1151_F63"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.metaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_1151_F41"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.accMetaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_1151_F42"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Plane.metaRelease">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_1151_F45"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Plane.dataRelease">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_1151_F46"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Plane.productID">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F44"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.id">
+                    <COLUMN dmtype="caom2:uuid" ref="T1526644375722_1151_F43"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Plane.dataProductType">
+                    <INSTANCE dmtype="caom2:DataProductType">
+                        <ATTRIBUTE dmrole="caom2:VocabularyTerm.term">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F47"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </ATTRIBUTE>
+                <COMPOSITION dmrole="caom2:Plane.quality">
+                    <INSTANCE dmtype="caom2:DataQuality" ID="T1526644375722_1326">
+                        <ATTRIBUTE dmrole="caom2:DataQuality.flag">
+                            <COLUMN dmtype="caom2:Quality" ref="T1526644375722_1151_F55"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.metrics">
+                    <INSTANCE dmtype="caom2:Metrics" ID="T1526644375722_1339">
+                        <ATTRIBUTE dmrole="caom2:Metrics.sourceNumberDensity">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F6"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Metrics.background">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F7"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Metrics.backgroundStddev">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F8"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Metrics.fluxDensityLimit">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F9"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Metrics.magLimit">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F10"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.position">
+                    <INSTANCE dmtype="caom2:Position" ID="T1526644375722_1360">
+                        <ATTRIBUTE dmrole="caom2:Position.resolution">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F14"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Position.sampleSize">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F15"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Position.timeDependent">
+                            <COLUMN dmtype="ivoa:boolean" ref="T1526644375722_1151_F18"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Position.dimension">
+                            <INSTANCE dmtype="caom2:Dimension2D">
+                                <ATTRIBUTE dmrole="caom2:Dimension2D.naxis1">
+                                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_1151_F16"/>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:Dimension2D.naxis2">
+                                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_1151_F17"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.energy">
+                    <INSTANCE dmtype="caom2:Energy" ID="T1526644375722_1404">
+                        <ATTRIBUTE dmrole="caom2:Energy.dimension">
+                            <COLUMN dmtype="ivoa:integer" ref="T1526644375722_1151_F25"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.resolvingPower">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F26"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.sampleSize">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F27"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.restwav">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F30"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.bandpassName">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F58"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.emBand">
+                            <COLUMN dmtype="caom2:EnergyBand" ref="T1526644375722_1151_F56"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.bounds">
+                            <INSTANCE dmtype="caom2:Interval">
+                                <ATTRIBUTE dmrole="caom2:Interval.lower">
+                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F21"/>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:Interval.upper">
+                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F22"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Energy.transition">
+                            <INSTANCE dmtype="caom2:EnergyTransition">
+                                <ATTRIBUTE dmrole="caom2:EnergyTransition.species">
+                                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F59"/>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:EnergyTransition.transition">
+                                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F60"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.time">
+                    <INSTANCE dmtype="caom2:Time" ID="T1526644375722_1463">
+                        <ATTRIBUTE dmrole="caom2:Time.dimension">
+                            <COLUMN dmtype="ivoa:integer" ref="T1526644375722_1151_F36"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Time.resolution">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F37"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Time.sampleSize">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F38"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Time.exposure">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F39"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Time.bounds">
+                            <INSTANCE dmtype="caom2:Interval">
+                                <ATTRIBUTE dmrole="caom2:Interval.lower">
+                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F32"/>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:Interval.upper">
+                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_1151_F33"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.polarization">
+                    <INSTANCE dmtype="caom2:Polarization" ID="T1526644375722_1504">
+                        <ATTRIBUTE dmrole="caom2:Polarization.dimension">
+                            <COLUMN dmtype="ivoa:integer" ref="T1526644375722_1151_F40"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Polarization.states">
+                            <COLUMN dmtype="caom2:PolarizationState" ref="T1526644375722_1151_F62"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Plane.provenance">
+                    <INSTANCE dmtype="caom2:Provenance" ID="T1526644375722_1519">
+                        <ATTRIBUTE dmrole="caom2:Provenance.name">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F48"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.version">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F49"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.reference">
+                            <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_1151_F50"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.producer">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F51"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.project">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F52"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.runID">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F53"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:Provenance.lastExecuted">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_1151_F54"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+            </INSTANCE>
+        </TEMPLATES>
+        <TEMPLATES tableref="T1526644375722_2284">
+            <INSTANCE dmtype="caom2:Artifact" ID="T1526644375722_121">
+                <PRIMARYKEY>
+                    <PKFIELD>
+                        <COLUMN dmtype="ivoa:string" ref="T1526644375722_2284_F7"/>
+                    </PKFIELD>
+                </PRIMARYKEY>
+                <CONTAINER>
+                    <FOREIGNKEY>
+                        <PKFIELD>
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2284_F6"/>
+                        </PKFIELD>
+                        <TARGETID>T1526644375722_156</TARGETID>
+                    </FOREIGNKEY>
+                </CONTAINER>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.metaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2284_F4"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.accMetaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2284_F5"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.contentLength">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2284_F1"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.contentChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2284_F2"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.contentType">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_2284_F10"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.releaseType">
+                    <COLUMN dmtype="caom2:ReleaseType" ref="T1526644375722_2284_F9"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.lastModified">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_2284_F11"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.uri">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2284_F0"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Artifact.productType">
+                    <INSTANCE dmtype="caom2:ProductType">
+                        <ATTRIBUTE dmrole="caom2:VocabularyTerm.term">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2284_F8"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </ATTRIBUTE>
+            </INSTANCE>
+        </TEMPLATES>
+        <TEMPLATES tableref="T1526644375722_2338">
+            <INSTANCE dmtype="caom2:Part" ID="T1526644375722_94">
+                <PRIMARYKEY>
+                    <PKFIELD>
+                        <COLUMN dmtype="ivoa:string" ref="T1526644375722_2338_F3"/>
+                    </PKFIELD>
+                </PRIMARYKEY>
+                <CONTAINER>
+                    <FOREIGNKEY>
+                        <PKFIELD>
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2338_F2"/>
+                        </PKFIELD>
+                        <TARGETID>T1526644375722_121</TARGETID>
+                    </FOREIGNKEY>
+                </CONTAINER>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.metaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2338_F0"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.accMetaChecksum">
+                    <COLUMN dmtype="ivoa:anyURI" ref="T1526644375722_2338_F1"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Part.name">
+                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_2338_F4"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:CaomEntity.lastModified">
+                    <COLUMN dmtype="ivoa:datetime" ref="T1526644375722_2338_F6"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Part.productType">
+                    <INSTANCE dmtype="caom2:ProductType">
+                        <ATTRIBUTE dmrole="caom2:VocabularyTerm.term">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2338_F5"/>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </ATTRIBUTE>
+            </INSTANCE>
+        </TEMPLATES>
+        <TEMPLATES tableref="T1526644375722_2355">
+            <INSTANCE dmtype="caom2:Chunk" ID="T1526644375722_1">
+                <PRIMARYKEY>
+                    <PKFIELD>
+                        <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F84"/>
+                    </PKFIELD>
+                </PRIMARYKEY>
+                <CONTAINER>
+                    <FOREIGNKEY>
+                        <PKFIELD>
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F83"/>
+                        </PKFIELD>
+                        <TARGETID>T1526644375722_94</TARGETID>
+                    </FOREIGNKEY>
+                </CONTAINER>
+                <ATTRIBUTE dmrole="caom2:Chunk.naxis">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F0"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.positionAxis1">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F1"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.positionAxis2">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F2"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.energyAxis">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F3"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.timeAxis">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F4"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.polarizationAxis">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F5"/>
+                </ATTRIBUTE>
+                <ATTRIBUTE dmrole="caom2:Chunk.observableAxis">
+                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F6"/>
+                </ATTRIBUTE>
+                <COMPOSITION dmrole="caom2:Chunk.position">
+                    <INSTANCE dmtype="caom2:SpatialWCS" ID="T1526644375722_2611">
+                        <ATTRIBUTE dmrole="caom2:SpatialWCS.resolution">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F8"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpatialWCS.equinox">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F7"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpatialWCS.coordsys">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F86"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpatialWCS.axis">
+                            <INSTANCE dmtype="caom2:CoordAxis2D">
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.axis1">
+                                    <INSTANCE dmtype="caom2:Axis">
+                                        <ATTRIBUTE dmrole="caom2:Axis.ctype">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F87"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:Axis.cunit">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F88"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.axis2">
+                                    <INSTANCE dmtype="caom2:Axis">
+                                        <ATTRIBUTE dmrole="caom2:Axis.ctype">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F89"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:Axis.cunit">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F90"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.error1">
+                                    <INSTANCE dmtype="caom2:CoordError">
+                                        <ATTRIBUTE dmrole="caom2:CoordError.rnder">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F9"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordError.syser">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F10"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.error2">
+                                    <INSTANCE dmtype="caom2:CoordError">
+                                        <ATTRIBUTE dmrole="caom2:CoordError.rnder">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F11"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordError.syser">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F12"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.range">
+                                    <INSTANCE dmtype="caom2:CoordRange2D">
+                                        <ATTRIBUTE dmrole="caom2:CoordRange2D.start">
+                                            <INSTANCE dmtype="caom2:Coord2D">
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord1">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F13"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F14"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord2">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F15"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F16"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordRange2D.end">
+                                            <INSTANCE dmtype="caom2:Coord2D">
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord1">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F17"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F18"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord2">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F19"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F20"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.function">
+                                    <INSTANCE dmtype="caom2:CoordFunction2D">
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.cd11">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F28"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.cd12">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F29"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.cd21">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F30"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.cd22">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F31"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.dimension">
+                                            <INSTANCE dmtype="caom2:Dimension2D">
+                                                <ATTRIBUTE dmrole="caom2:Dimension2D.naxis1">
+                                                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F22"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:Dimension2D.naxis2">
+                                                    <COLUMN dmtype="ivoa:integer" ref="T1526644375722_2355_F23"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction2D.refCoord">
+                                            <INSTANCE dmtype="caom2:Coord2D">
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord1">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F24"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F25"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:Coord2D.coord2">
+                                                    <INSTANCE dmtype="caom2:RefCoord">
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F26"/>
+                                                        </ATTRIBUTE>
+                                                        <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F27"/>
+                                                        </ATTRIBUTE>
+                                                    </INSTANCE>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Chunk.energy">
+                    <INSTANCE dmtype="caom2:SpectralWCS" ID="T1526644375722_2842">
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.restfrq">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F43"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.restwav">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F44"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.velosys">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F45"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.zsource">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F46"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.velang">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F47"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.resolvingPower">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F48"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.bandpassName">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F95"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.ssysobs">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F93"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.ssyssrc">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F94"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.specsys">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F51"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.axis">
+                            <INSTANCE dmtype="caom2:CoordAxis1D">
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.error">
+                                    <INSTANCE dmtype="caom2:CoordError">
+                                        <ATTRIBUTE dmrole="caom2:CoordError.rnder">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F33"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordError.syser">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F32"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.range">
+                                    <INSTANCE dmtype="caom2:CoordRange1D">
+                                        <ATTRIBUTE dmrole="caom2:CoordRange1D.start">
+                                            <INSTANCE dmtype="caom2:RefCoord">
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F34"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F35"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordRange1D.end">
+                                            <INSTANCE dmtype="caom2:RefCoord">
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F36"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F37"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.function">
+                                    <INSTANCE dmtype="caom2:CoordFunction1D">
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction1D.delta">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F42"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordFunction1D.refCoord">
+                                            <INSTANCE dmtype="caom2:RefCoord">
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F40"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F41"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.axis">
+                                    <INSTANCE dmtype="caom2:Axis">
+                                        <ATTRIBUTE dmrole="caom2:Axis.ctype">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F91"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:Axis.cunit">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F92"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:SpectralWCS.transition">
+                            <INSTANCE dmtype="caom2:EnergyTransition">
+                                <ATTRIBUTE dmrole="caom2:EnergyTransition.species">
+                                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F96"/>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:EnergyTransition.transition">
+                                    <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F97"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+                <COMPOSITION dmrole="caom2:Chunk.time">
+                    <INSTANCE dmtype="caom2:TemporalWCS" ID="T1526644375722_5668">
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.timesys">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F63"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.trefpos">
+                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F64"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.mjdref">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F61"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.exposure">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F62"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.resolution">
+                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F65"/>
+                        </ATTRIBUTE>
+                        <ATTRIBUTE dmrole="caom2:TemporalWCS.axis">
+                            <INSTANCE dmtype="caom2:CoordAxis1D">
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.axis">
+                                    <INSTANCE dmtype="caom2:Axis">
+                                        <ATTRIBUTE dmrole="caom2:Axis.ctype">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F98"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:Axis.cunit">
+                                            <COLUMN dmtype="ivoa:string" ref="T1526644375722_2355_F99"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis2D.error">
+                                    <INSTANCE dmtype="caom2:CoordError">
+                                        <ATTRIBUTE dmrole="caom2:CoordError.rnder">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F50"/>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordError.syser">
+                                            <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F49"/>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.range">
+                                    <INSTANCE dmtype="caom2:CoordRange1D">
+                                        <ATTRIBUTE dmrole="caom2:CoordRange1D.start">
+                                            <INSTANCE dmtype="caom2:RefCoord">
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F52"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F53"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                        <ATTRIBUTE dmrole="caom2:CoordRange1D.end">
+                                            <INSTANCE dmtype="caom2:RefCoord">
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.pix">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F54"/>
+                                                </ATTRIBUTE>
+                                                <ATTRIBUTE dmrole="caom2:RefCoord.val">
+                                                    <COLUMN dmtype="ivoa:real" ref="T1526644375722_2355_F55"/>
+                                                </ATTRIBUTE>
+                                            </INSTANCE>
+                                        </ATTRIBUTE>
+                                    </INSTANCE>
+                                </ATTRIBUTE>
+                                <ATTRIBUTE dmrole="caom2:CoordAxis1D.bounds">
+                                    <INSTANCE dmtype="caom2:CoordBounds1D"/>
+                                </ATTRIBUTE>
+                            </INSTANCE>
+                        </ATTRIBUTE>
+                    </INSTANCE>
+                </COMPOSITION>
+            </INSTANCE>
+        </TEMPLATES>
+    </VODML>
+    <RESOURCE>
+        <TABLE ID="T1526644375722_252">
+            <INFO name="type" value="TAP_TABLE"/>
+            <INFO name="name" value="caom2.Observation"/>
+            <INFO name="tap_endpoint" value="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/tap"/>
+            <FIELD name="observationURI" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F0"/>
+            <FIELD name="sequenceNumber" datatype="int" xtype="int" ID="T1526644375722_252_F1"/>
+            <FIELD name="proposal_keywords" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F2"/>
+            <FIELD name="target_standard" datatype="int" xtype="int" ID="T1526644375722_252_F3"/>
+            <FIELD name="target_redshift" datatype="double" xtype="double" ID="T1526644375722_252_F4"/>
+            <FIELD name="target_moving" datatype="int" xtype="int" ID="T1526644375722_252_F5"/>
+            <FIELD name="target_keywords" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F6"/>
+            <FIELD name="telescope_geoLocationX" datatype="double" xtype="double" ID="T1526644375722_252_F7"/>
+            <FIELD name="telescope_geoLocationY" datatype="double" xtype="double" ID="T1526644375722_252_F8"/>
+            <FIELD name="telescope_geoLocationZ" datatype="double" xtype="double" ID="T1526644375722_252_F9"/>
+            <FIELD name="telescope_keywords" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F10"/>
+            <FIELD name="instrument_keywords" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F11"/>
+            <FIELD name="environment_seeing" datatype="double" xtype="double" ID="T1526644375722_252_F12"/>
+            <FIELD name="environment_humidity" datatype="double" xtype="double" ID="T1526644375722_252_F13"/>
+            <FIELD name="environment_elevation" datatype="double" xtype="double" ID="T1526644375722_252_F14"/>
+            <FIELD name="environment_tau" datatype="double" xtype="double" ID="T1526644375722_252_F15"/>
+            <FIELD name="environment_wavelengthTau" datatype="double" xtype="double" ID="T1526644375722_252_F16"/>
+            <FIELD name="environment_ambientTemp" datatype="double" xtype="double" ID="T1526644375722_252_F17"/>
+            <FIELD name="environment_photometric" datatype="int" xtype="int" ID="T1526644375722_252_F18"/>
+            <FIELD name="members" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F19"/>
+            <FIELD name="metaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F20"/>
+            <FIELD name="accMetaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F21"/>
+            <FIELD name="obsID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F22"/>
+            <FIELD name="collection" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F23"/>
+            <FIELD name="observationID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F24"/>
+            <FIELD name="algorithm_name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F25"/>
+            <FIELD name="type" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F26"/>
+            <FIELD name="intent" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F27"/>
+            <FIELD name="metaRelease" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F28"/>
+            <FIELD name="proposal_id" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F29"/>
+            <FIELD name="proposal_pi" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F30"/>
+            <FIELD name="proposal_project" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F31"/>
+            <FIELD name="proposal_title" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F32"/>
+            <FIELD name="target_name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F33"/>
+            <FIELD name="target_type" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F34"/>
+            <FIELD name="telescope_name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F35"/>
+            <FIELD name="requirements_flag" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F36"/>
+            <FIELD name="instrument_name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F37"/>
+            <FIELD name="lastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F38"/>
+            <FIELD name="maxLastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_252_F39"/>
+        </TABLE>
+        <TABLE ID="T1526644375722_1151">
+            <INFO name="type" value="TAP_TABLE"/>
+            <INFO name="name" value="caom2.Plane"/>
+            <INFO name="tap_endpoint" value="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/tap"/>
+            <FIELD name="planeURI" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F0"/>
+            <FIELD name="publisherID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F1"/>
+            <FIELD name="calibrationLevel" datatype="int" xtype="int" ID="T1526644375722_1151_F2"/>
+            <FIELD name="obsID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F3"/>
+            <FIELD name="provenance_keywords" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F4"/>
+            <FIELD name="provenance_inputs" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F5"/>
+            <FIELD name="metrics_sourceNumberDensity" datatype="double" xtype="double" ID="T1526644375722_1151_F6"/>
+            <FIELD name="metrics_background" datatype="double" xtype="double" ID="T1526644375722_1151_F7"/>
+            <FIELD name="metrics_backgroundStddev" datatype="double" xtype="double" ID="T1526644375722_1151_F8"/>
+            <FIELD name="metrics_fluxDensityLimit" datatype="double" xtype="double" ID="T1526644375722_1151_F9"/>
+            <FIELD name="metrics_magLimit" datatype="double" xtype="double" ID="T1526644375722_1151_F10"/>
+            <FIELD name="position_bounds" datatype="double" xtype="double" ID="T1526644375722_1151_F11"/>
+            <FIELD name="position_bounds_samples" datatype="double" xtype="double" ID="T1526644375722_1151_F12"/>
+            <FIELD name="position_bounds_size" datatype="double" xtype="double" ID="T1526644375722_1151_F13"/>
+            <FIELD name="position_resolution" datatype="double" xtype="double" ID="T1526644375722_1151_F14"/>
+            <FIELD name="position_sampleSize" datatype="double" xtype="double" ID="T1526644375722_1151_F15"/>
+            <FIELD name="position_dimension_naxis1" datatype="long" xtype="long" ID="T1526644375722_1151_F16"/>
+            <FIELD name="position_dimension_naxis2" datatype="long" xtype="long" ID="T1526644375722_1151_F17"/>
+            <FIELD name="position_timeDependent" datatype="int" xtype="int" ID="T1526644375722_1151_F18"/>
+            <FIELD name="position_bounds_points" datatype="double" xtype="double" ID="T1526644375722_1151_F19"/>
+            <FIELD name="energy_bounds_samples" datatype="double" xtype="double" ID="T1526644375722_1151_F20"/>
+            <FIELD name="energy_bounds_lower" datatype="double" xtype="double" ID="T1526644375722_1151_F21"/>
+            <FIELD name="energy_bounds_upper" datatype="double" xtype="double" ID="T1526644375722_1151_F22"/>
+            <FIELD name="energy_bounds_width" datatype="double" xtype="double" ID="T1526644375722_1151_F23"/>
+            <FIELD name="energy_bounds_integrated" datatype="double" xtype="double" ID="T1526644375722_1151_F24"/>
+            <FIELD name="energy_dimension" datatype="long" xtype="long" ID="T1526644375722_1151_F25"/>
+            <FIELD name="energy_resolvingPower" datatype="double" xtype="double" ID="T1526644375722_1151_F26"/>
+            <FIELD name="energy_sampleSize" datatype="double" xtype="double" ID="T1526644375722_1151_F27"/>
+            <FIELD name="energy_freqWidth" datatype="double" xtype="double" ID="T1526644375722_1151_F28"/>
+            <FIELD name="energy_freqSampleSize" datatype="double" xtype="double" ID="T1526644375722_1151_F29"/>
+            <FIELD name="energy_restwav" datatype="double" xtype="double" ID="T1526644375722_1151_F30"/>
+            <FIELD name="time_bounds_samples" datatype="double" xtype="double" ID="T1526644375722_1151_F31"/>
+            <FIELD name="time_bounds_lower" datatype="double" xtype="double" ID="T1526644375722_1151_F32"/>
+            <FIELD name="time_bounds_upper" datatype="double" xtype="double" ID="T1526644375722_1151_F33"/>
+            <FIELD name="time_bounds_width" datatype="double" xtype="double" ID="T1526644375722_1151_F34"/>
+            <FIELD name="time_bounds_integrated" datatype="double" xtype="double" ID="T1526644375722_1151_F35"/>
+            <FIELD name="time_dimension" datatype="long" xtype="long" ID="T1526644375722_1151_F36"/>
+            <FIELD name="time_resolution" datatype="double" xtype="double" ID="T1526644375722_1151_F37"/>
+            <FIELD name="time_sampleSize" datatype="double" xtype="double" ID="T1526644375722_1151_F38"/>
+            <FIELD name="time_exposure" datatype="double" xtype="double" ID="T1526644375722_1151_F39"/>
+            <FIELD name="polarization_dimension" datatype="long" xtype="long" ID="T1526644375722_1151_F40"/>
+            <FIELD name="metaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F41"/>
+            <FIELD name="accMetaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F42"/>
+            <FIELD name="planeID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F43"/>
+            <FIELD name="productID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F44"/>
+            <FIELD name="metaRelease" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F45"/>
+            <FIELD name="dataRelease" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F46"/>
+            <FIELD name="dataProductType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F47"/>
+            <FIELD name="provenance_name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F48"/>
+            <FIELD name="provenance_version" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F49"/>
+            <FIELD name="provenance_reference" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F50"/>
+            <FIELD name="provenance_producer" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F51"/>
+            <FIELD name="provenance_project" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F52"/>
+            <FIELD name="provenance_runID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F53"/>
+            <FIELD name="provenance_lastExecuted" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F54"/>
+            <FIELD name="quality_flag" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F55"/>
+            <FIELD name="energy_emBand" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F56"/>
+            <FIELD name="energy_bounds" datatype="double" xtype="double" ID="T1526644375722_1151_F57"/>
+            <FIELD name="energy_bandpassName" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F58"/>
+            <FIELD name="energy_transition_species" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F59"/>
+            <FIELD name="energy_transition_transition" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F60"/>
+            <FIELD name="time_bounds" datatype="double" xtype="double" ID="T1526644375722_1151_F61"/>
+            <FIELD name="polarization_states" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F62"/>
+            <FIELD name="lastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_1151_F63"/>
+        </TABLE>
+        <TABLE ID="T1526644375722_2284">
+            <INFO name="type" value="TAP_TABLE"/>
+            <INFO name="name" value="caom2.Artifact"/>
+            <INFO name="tap_endpoint" value="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/tap"/>
+            <FIELD name="uri" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F0"/>
+            <FIELD name="contentLength" datatype="long" xtype="long" ID="T1526644375722_2284_F1"/>
+            <FIELD name="contentChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F2"/>
+            <FIELD name="accessURL" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F3"/>
+            <FIELD name="metaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F4"/>
+            <FIELD name="accMetaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F5"/>
+            <FIELD name="planeID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F6"/>
+            <FIELD name="artifactID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F7"/>
+            <FIELD name="productType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F8"/>
+            <FIELD name="releaseType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F9"/>
+            <FIELD name="contentType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F10"/>
+            <FIELD name="lastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2284_F11"/>
+        </TABLE>
+        <TABLE ID="T1526644375722_2338">
+            <INFO name="type" value="TAP_TABLE"/>
+            <INFO name="name" value="caom2.Part"/>
+            <INFO name="tap_endpoint" value="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/tap"/>
+            <FIELD name="metaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F0"/>
+            <FIELD name="accMetaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F1"/>
+            <FIELD name="artifactID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F2"/>
+            <FIELD name="partID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F3"/>
+            <FIELD name="name" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F4"/>
+            <FIELD name="productType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F5"/>
+            <FIELD name="lastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2338_F6"/>
+        </TABLE>
+        <TABLE ID="T1526644375722_2355">
+            <INFO name="type" value="TAP_TABLE"/>
+            <INFO name="name" value="caom2.Chunk"/>
+            <INFO name="tap_endpoint" value="http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/tap"/>
+            <FIELD name="naxis" datatype="int" xtype="int" ID="T1526644375722_2355_F0"/>
+            <FIELD name="positionAxis1" datatype="int" xtype="int" ID="T1526644375722_2355_F1"/>
+            <FIELD name="positionAxis2" datatype="int" xtype="int" ID="T1526644375722_2355_F2"/>
+            <FIELD name="energyAxis" datatype="int" xtype="int" ID="T1526644375722_2355_F3"/>
+            <FIELD name="timeAxis" datatype="int" xtype="int" ID="T1526644375722_2355_F4"/>
+            <FIELD name="polarizationAxis" datatype="int" xtype="int" ID="T1526644375722_2355_F5"/>
+            <FIELD name="observableAxis" datatype="int" xtype="int" ID="T1526644375722_2355_F6"/>
+            <FIELD name="position_equinox" datatype="double" xtype="double" ID="T1526644375722_2355_F7"/>
+            <FIELD name="position_resolution" datatype="double" xtype="double" ID="T1526644375722_2355_F8"/>
+            <FIELD name="position_axis_error1_syser" datatype="double" xtype="double" ID="T1526644375722_2355_F9"/>
+            <FIELD name="position_axis_error1_rnder" datatype="double" xtype="double" ID="T1526644375722_2355_F10"/>
+            <FIELD name="position_axis_error2_syser" datatype="double" xtype="double" ID="T1526644375722_2355_F11"/>
+            <FIELD name="position_axis_error2_rnder" datatype="double" xtype="double" ID="T1526644375722_2355_F12"/>
+            <FIELD name="position_axis_range_start_coord1_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F13"/>
+            <FIELD name="position_axis_range_start_coord1_val" datatype="double" xtype="double" ID="T1526644375722_2355_F14"/>
+            <FIELD name="position_axis_range_start_coord2_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F15"/>
+            <FIELD name="position_axis_range_start_coord2_val" datatype="double" xtype="double" ID="T1526644375722_2355_F16"/>
+            <FIELD name="position_axis_range_end_coord1_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F17"/>
+            <FIELD name="position_axis_range_end_coord1_val" datatype="double" xtype="double" ID="T1526644375722_2355_F18"/>
+            <FIELD name="position_axis_range_end_coord2_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F19"/>
+            <FIELD name="position_axis_range_end_coord2_val" datatype="double" xtype="double" ID="T1526644375722_2355_F20"/>
+            <FIELD name="position_axis_bounds" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F21"/>
+            <FIELD name="position_axis_function_dimension_naxis1" datatype="long" xtype="long" ID="T1526644375722_2355_F22"/>
+            <FIELD name="position_axis_function_dimension_naxis2" datatype="long" xtype="long" ID="T1526644375722_2355_F23"/>
+            <FIELD name="position_axis_function_refCoord_coord1_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F24"/>
+            <FIELD name="position_axis_function_refCoord_coord1_val" datatype="double" xtype="double" ID="T1526644375722_2355_F25"/>
+            <FIELD name="position_axis_function_refCoord_coord2_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F26"/>
+            <FIELD name="position_axis_function_refCoord_coord2_val" datatype="double" xtype="double" ID="T1526644375722_2355_F27"/>
+            <FIELD name="position_axis_function_cd11" datatype="double" xtype="double" ID="T1526644375722_2355_F28"/>
+            <FIELD name="position_axis_function_cd12" datatype="double" xtype="double" ID="T1526644375722_2355_F29"/>
+            <FIELD name="position_axis_function_cd21" datatype="double" xtype="double" ID="T1526644375722_2355_F30"/>
+            <FIELD name="position_axis_function_cd22" datatype="double" xtype="double" ID="T1526644375722_2355_F31"/>
+            <FIELD name="energy_axis_error_syser" datatype="double" xtype="double" ID="T1526644375722_2355_F32"/>
+            <FIELD name="energy_axis_error_rnder" datatype="double" xtype="double" ID="T1526644375722_2355_F33"/>
+            <FIELD name="energy_axis_range_start_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F34"/>
+            <FIELD name="energy_axis_range_start_val" datatype="double" xtype="double" ID="T1526644375722_2355_F35"/>
+            <FIELD name="energy_axis_range_end_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F36"/>
+            <FIELD name="energy_axis_range_end_val" datatype="double" xtype="double" ID="T1526644375722_2355_F37"/>
+            <FIELD name="energy_axis_bounds" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F38"/>
+            <FIELD name="energy_axis_function_naxis" datatype="long" xtype="long" ID="T1526644375722_2355_F39"/>
+            <FIELD name="energy_axis_function_refCoord_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F40"/>
+            <FIELD name="energy_axis_function_refCoord_val" datatype="double" xtype="double" ID="T1526644375722_2355_F41"/>
+            <FIELD name="energy_axis_function_delta" datatype="double" xtype="double" ID="T1526644375722_2355_F42"/>
+            <FIELD name="energy_restfrq" datatype="double" xtype="double" ID="T1526644375722_2355_F43"/>
+            <FIELD name="energy_restwav" datatype="double" xtype="double" ID="T1526644375722_2355_F44"/>
+            <FIELD name="energy_velosys" datatype="double" xtype="double" ID="T1526644375722_2355_F45"/>
+            <FIELD name="energy_zsource" datatype="double" xtype="double" ID="T1526644375722_2355_F46"/>
+            <FIELD name="energy_velang" datatype="double" xtype="double" ID="T1526644375722_2355_F47"/>
+            <FIELD name="energy_resolvingPower" datatype="double" xtype="double" ID="T1526644375722_2355_F48"/>
+            <FIELD name="time_axis_error_syser" datatype="double" xtype="double" ID="T1526644375722_2355_F49"/>
+            <FIELD name="time_axis_error_rnder" datatype="double" xtype="double" ID="T1526644375722_2355_F50"/>
+            <FIELD name="energy_specsys" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F51"/>
+            <FIELD name="time_axis_range_start_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F52"/>
+            <FIELD name="time_axis_range_start_val" datatype="double" xtype="double" ID="T1526644375722_2355_F53"/>
+            <FIELD name="time_axis_range_end_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F54"/>
+            <FIELD name="time_axis_range_end_val" datatype="double" xtype="double" ID="T1526644375722_2355_F55"/>
+            <FIELD name="time_axis_bounds" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F56"/>
+            <FIELD name="time_axis_function_naxis" datatype="long" xtype="long" ID="T1526644375722_2355_F57"/>
+            <FIELD name="time_axis_function_refCoord_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F58"/>
+            <FIELD name="time_axis_function_refCoord_val" datatype="double" xtype="double" ID="T1526644375722_2355_F59"/>
+            <FIELD name="time_axis_function_delta" datatype="double" xtype="double" ID="T1526644375722_2355_F60"/>
+            <FIELD name="time_mjdref" datatype="double" xtype="double" ID="T1526644375722_2355_F61"/>
+            <FIELD name="time_exposure" datatype="double" xtype="double" ID="T1526644375722_2355_F62"/>
+            <FIELD name="time_timesys" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F63"/>
+            <FIELD name="time_trefpos" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F64"/>
+            <FIELD name="time_resolution" datatype="double" xtype="double" ID="T1526644375722_2355_F65"/>
+            <FIELD name="polarization_axis_error_syser" datatype="double" xtype="double" ID="T1526644375722_2355_F66"/>
+            <FIELD name="polarization_axis_error_rnder" datatype="double" xtype="double" ID="T1526644375722_2355_F67"/>
+            <FIELD name="polarization_axis_range_start_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F68"/>
+            <FIELD name="polarization_axis_range_start_val" datatype="double" xtype="double" ID="T1526644375722_2355_F69"/>
+            <FIELD name="polarization_axis_range_end_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F70"/>
+            <FIELD name="polarization_axis_range_end_val" datatype="double" xtype="double" ID="T1526644375722_2355_F71"/>
+            <FIELD name="polarization_axis_bounds" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F72"/>
+            <FIELD name="polarization_axis_function_naxis" datatype="long" xtype="long" ID="T1526644375722_2355_F73"/>
+            <FIELD name="polarization_axis_function_refCoord_pix" datatype="double" xtype="double" ID="T1526644375722_2355_F74"/>
+            <FIELD name="polarization_axis_function_refCoord_val" datatype="double" xtype="double" ID="T1526644375722_2355_F75"/>
+            <FIELD name="polarization_axis_function_delta" datatype="double" xtype="double" ID="T1526644375722_2355_F76"/>
+            <FIELD name="observable_independent_bin" datatype="long" xtype="long" ID="T1526644375722_2355_F77"/>
+            <FIELD name="observable_dependent_bin" datatype="long" xtype="long" ID="T1526644375722_2355_F78"/>
+            <FIELD name="metaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F79"/>
+            <FIELD name="accMetaChecksum" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F80"/>
+            <FIELD name="polarization_axis_axis_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F81"/>
+            <FIELD name="polarization_axis_axis_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F82"/>
+            <FIELD name="partID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F83"/>
+            <FIELD name="chunkID" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F84"/>
+            <FIELD name="productType" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F85"/>
+            <FIELD name="position_coordsys" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F86"/>
+            <FIELD name="position_axis_axis1_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F87"/>
+            <FIELD name="position_axis_axis1_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F88"/>
+            <FIELD name="position_axis_axis2_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F89"/>
+            <FIELD name="position_axis_axis2_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F90"/>
+            <FIELD name="energy_axis_axis_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F91"/>
+            <FIELD name="energy_axis_axis_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F92"/>
+            <FIELD name="energy_ssysobs" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F93"/>
+            <FIELD name="energy_ssyssrc" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F94"/>
+            <FIELD name="energy_bandpassName" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F95"/>
+            <FIELD name="energy_transition_species" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F96"/>
+            <FIELD name="energy_transition_transition" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F97"/>
+            <FIELD name="time_axis_axis_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F98"/>
+            <FIELD name="time_axis_axis_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F99"/>
+            <FIELD name="observable_independent_axis_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F100"/>
+            <FIELD name="observable_independent_axis_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F101"/>
+            <FIELD name="observable_dependent_axis_ctype" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F102"/>
+            <FIELD name="observable_dependent_axis_cunit" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F103"/>
+            <FIELD name="lastModified" datatype="char" arraysize="*" xtype="char" ID="T1526644375722_2355_F104"/>
+        </TABLE>
+    </RESOURCE>
+</VOTABLE>

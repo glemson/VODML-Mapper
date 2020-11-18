@@ -1,0 +1,66 @@
+.ui-widget-overlay
+{
+  opacity: .60 !important; /* Make sure to change both of these, as IE only sees the second one */
+  filter: Alpha(Opacity=60) !important;
+
+  background-color: #D8EEEE !important; /* This will make it darker */
+}
+.overlay
+            {
+                border: 1px solid white;
+            }
+          .overlayret
+            {
+                border: 4px solid white;
+            }
+          .overlaytype0
+            {
+                border: 2px solid white;
+            }
+          .overlaytype1
+            {
+                border: 1px solid yellow;
+            }
+          .overlaytype2
+            {
+                border: 1px solid red;
+            }
+
+
+html {
+    height: 100%;
+}
+ 
+body {
+    font: 11px/1.6 Arial, sans-serif;
+    color: #444;
+    overflow: -moz-scrollbars-vertical;
+    padding: 0;
+    margin: 5px;
+        background : #CCCCCC;
+}
+ 
+a:link, a:visited {
+    color: #5275b4;
+    font-weight: bold;
+    outline: none;
+}
+ 
+a:hover, a:active {
+    color: #849cc9;
+}
+
+ 
+
+#t_container {
+    background: #ffffff;
+    width: 720px;
+    border: 10px;
+    margin: 0 auto; 
+    min-height: 100%;
+    height: auto !important;
+    height: 100%; /*stoopid ie*/
+}
+
+
+

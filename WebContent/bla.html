@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Adding new Context Menu Triggers Demo - jQuery contextMenu Plugin</title>
+
+<!-- 
+    <script src="http://medialize.github.io/jQuery-contextMenu//jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.js" type="text/javascript"></script>
+    <link href="http://medialize.github.io/jQuery-contextMenu/src/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+ -->
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery.contextMenu_1.6.5.js" type="text/javascript"></script>
+    <link href="css/jquery.contextMenu_1.6.5.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+    <h2 id="demo">Demo: Adding new Context Menu Triggers</h2>
+    <p><code>jQuery.contextMenu</code> allows you to define a &lt;menu&gt; before the trigger elements are available</p>
+<div class="context-menu-one box menu-1" id="11111">
+    <strong>right click me</strong>
+</div>
+<button type="button" id="add-trigger">add new trigger</button>
+
+    <script type="text/javascript" class="showcase">
+$(function(){
+    // add new trigger
+    $('#add-trigger').on('click', function(e) {
+        $('<div class="context-menu-one box menu-injected" id="22222">'
+            + 'right click me <em>(injected)</em>'
+            + '</div>').insertBefore(this);
+
+        // not need for re-initializing $.contextMenu here :)
+    });
+    
+    $.contextMenu({
+        selector: '.context-menu-one', 
+        callback: function(key, options) {
+            var m = "clicked: " + key;
+            window.console && console.log(m) || alert(m); 
+        },
+        items: {
+            "edit": {name: "Edit", icon: "edit"},
+            "cut": {name: "Cut", icon: "cut"},
+            "copy": {name: "Copy", icon: "copy"},
+            "paste": {name: "Paste", icon: "paste"},
+            "delete": {name: "Delete", icon: "delete"},
+            "sep1": "---------",
+            "quit": {name: "Quit", icon: "quit"}
+        }
+    });
+});
+    </script>
+
+
+</body>
+</html>
