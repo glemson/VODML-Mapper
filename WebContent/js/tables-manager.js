@@ -5,6 +5,7 @@ function SourceTable() {
 	this.id = null;
 	this.type = null; // VOTABLE TAP_TABLE SCSTABLE FITSTABLE ...
 	this.name = null;
+	this.original_name = null;
 	this.description = null;
 	this.info = null;
 	this.columns = null;
@@ -49,6 +50,8 @@ SourceTable.prototype.getState = function() {
 		state.table_rank = this.info["tableRank"];
 		if (this.info["xmlid"])
 			state.xmlid = this.info["xmlid"];
+		if (this.info["original_name"])
+			state.original_name = this.info["original_name"];
 	} else if (this.type == "TAP_TABLE") {
 		state.tap_endpoint = this.info.endpoint;
 		state.schema_name = this.info.schema_name;
@@ -799,13 +802,23 @@ var VOTablesManager = function(tablesManager) {
 		container.push(table);
 		var jdom = jQuery(dom);
 		var n = votable.numTables + 1;
-		table["name"] = votable.name + "::TABLE_" + n;
+
+		var info = new Object();
+
+		var name = jdom.attr("name")
+		if (name != null) {
+			table["name"] = votable.name + "::" + name+"["+n+"]";
+			table["original_name"]=name;
+			info["original_name"]=name;
+		} else {
+			table["name"] = votable.name + "::TABLE"+"["+n+"]"
+//			table["name"] = votable.name + "::TABLE_" + n;
+		}
 		var id = votable.url + "#TABLE_"+n;
 		table["id"] = id;
 		table["type"] = "VOTABLE";
 		// VOTABLE info
 		table["description"] = jdom.find(">DESCRIPTION").text();
-		var info = new Object();
 		info["votable-url"] = votable.url;
 		info["tableRank"] = n;
 		var xmlid = jdom.attr("ID");

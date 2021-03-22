@@ -226,6 +226,9 @@ VODML2VOTableAnnotator = function(tablesManager, modelsManager,exportDATA = fals
 					newINFO(TABLE, "tap_endpoint", info.tap_endpoint);
 					addFIELDs(TABLE, info);
 				} else if (info.type == "VOTABLE") {
+					if(info.original_name){
+						TABLE.setAttribute("name",info.original_name);
+					}
 					newINFO(TABLE, "votable_url", info.votable_url);
 					newINFO(TABLE, "table_rank", info.table_rank);
 					if (info.xmlid)
