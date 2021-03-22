@@ -67,7 +67,7 @@
 </td></tr></table>
 		</div>
 	</div>
-	<div id="tableurlload_dialog" title="Load Table(s) form URL">
+	<div id="tableurlload_dialog" title="Load Table(s) from URL">
 		<table>
 			<tr>
 				<td>SCS</td>
