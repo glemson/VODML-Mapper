@@ -135,6 +135,7 @@ var VODML = function() {
 	 */
 	this.findVODMLElement = function(vodmlref)
 	{
+		vodmlref=vodmlref.trim();
 		var ix = vodmlref.indexOf(":");
 		var modelname=(ix==-1?vodmlref:vodmlref.substring(0,ix));
 		var model = that.findModel(modelname);
