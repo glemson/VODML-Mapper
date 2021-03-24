@@ -100,6 +100,7 @@ function SourceColumn(_tableId, _rank) {
 var TablesManager = function(config) // a controller
 {
 	var that = this;
+	this.mapperView = null;
 	this.tapManager = new TAP.Controller(this);
 	this.votablesManager = new VOTablesManager(this);
 	this.tablesTreeView = new TablesTreeView(config.tablesTreeDiv, this);
@@ -114,6 +115,9 @@ var TablesManager = function(config) // a controller
 		that.tapManager.clearAll();
 		that.votablesManager.clearAll();
 		that.tables = new Object();
+		if(that.mapperView){
+			that.mapperView.clearAllTables();
+		}
 	};
 	
 	this.addTable = function(table) {
@@ -396,7 +400,17 @@ var TablesTreeView = function(tablestreediv, tablesManager) {
 			ccp : false
 		};
 		// remove for: VIZIER_TABLE VOTABLE tapendpoint
-		if (nodetype == 'VIZIER_TABLE') {
+		if(nodetype == "tablesroot"){
+			menu.clearAll = {
+				"label" : "Clear all",
+				"disabled" : false,
+				"action" : function() { 
+					tablesManager.clearAll(); 
+					},
+				"_disabled" : false
+			};
+		}
+		else if (nodetype == 'VIZIER_TABLE') {
 			menu.removeVIZIER_TABLE = {
 				"label" : 'Remove VizieR table',
 				"action" : function() {

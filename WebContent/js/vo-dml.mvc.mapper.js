@@ -531,6 +531,7 @@ var MapperView = function(mapContainer,  models, tablesManager) {
 	var mapperView = this;
 	var objects = new Object();
 	var tables = new Object();
+	tablesManager.mapperView = this;
 	this.name = "MAPPER";
 	logConsole.log("Starting.....\n",that.name);
 // methods/vars for creating random IDs
@@ -622,13 +623,12 @@ var MapperView = function(mapContainer,  models, tablesManager) {
 	// clear whole view, update counters
 	this.clearAll = function()
 	{
-// alert("Clear all in mapperview");
 		reset(); // reset date and counter for id generation.
 		jsPlumb.setSuspendDrawing(true);
 		
 		// to speed things up, first call following methods to get rid of
 		// jsplumb connections and endpoints.
-		// only oding this implicitly through the individual remove calls is
+		// only doing this implicitly through the individual remove calls is
 		// very slow for larger graphs
 		jsPlumb.detachEveryConnection();
 		jsPlumb.deleteEveryEndpoint();
@@ -644,7 +644,30 @@ var MapperView = function(mapContainer,  models, tablesManager) {
 		jsPlumb.setSuspendDrawing(false, true);
 
 	};
+	
+	this.clearAllObjects = function()
+	{
+		jsPlumb.setSuspendDrawing(true);
+		
+		jQuery.each(objects, function(key, value)
+		{
+			removeType(key);
+		});
+		jsPlumb.setSuspendDrawing(false, true);
 
+	};
+
+	this.clearAllTables = function()
+	{
+		jsPlumb.setSuspendDrawing(true);
+		
+		jQuery.each(tables, function(key, value)
+		{
+			removeTable(key);
+		});
+		jsPlumb.setSuspendDrawing(false, true);
+
+	};
 	
 //-------------------------------------------
 	function isSpecialDataType(dt)
