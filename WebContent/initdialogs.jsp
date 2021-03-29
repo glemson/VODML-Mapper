@@ -218,9 +218,9 @@
 <input type="radio" id="savestate_update" name="updatemode" value="update">&nbsp;Update
 </div>
 <h3>Your reference</h3>
-<input type="text" id="state_label"></input> 
+<input type="text" id="state_label" size="64"></input> 
 <h3>Annotation</h3>
-<textarea id="state_annotation"></textarea>
+<textarea id="state_annotation" cols="64" rows="5"></textarea>
 </div>
 
 <script >
