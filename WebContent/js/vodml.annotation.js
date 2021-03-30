@@ -196,7 +196,7 @@ VODML2VOTableAnnotator = function(tablesManager, modelsManager,exportDATA = fals
 		VOTABLE = doc.firstChild;
 		VOTABLE.setAttribute("xmlns",VOTABLE_NAMESPACE);
 		VOTABLE.setAttribute("xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
-		VOTABLE.setAttribute("xsi:schemaLocation","http://www.ivoa.net/xml/VOTable/v1.4_vodml http://volute.g-vo.org/svn/trunk/projects/dm/vo-dml/xsd/ext/VOTable-1.4_vodml.xsd");
+		VOTABLE.setAttribute("xsi:schemaLocation","http://www.ivoa.net/xml/VOTable/v1.4_vodml https://volute.g-vo.org/svn/trunk/projects/dm/vo-dml-org/xsd/ext/VOTable-1.4_vodml.xsd");
 		
 		VODML = newElement(VOTABLE,"VODML")
 // ---
