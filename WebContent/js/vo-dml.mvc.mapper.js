@@ -56,7 +56,7 @@ var MapperController = function(config, modelsManager, tablesManager, baseContro
 	};
 	this.toVOTable = function()
 	{
-    	var vodml2VOTableMapper = new VODML2VOTableAnnotator(tablesManager, modelsManager);
+    	var vodml2VOTableMapper = new VODML2VOTableAnnotator(tablesManager, modelsManager,true);
     			//new VODML2VOTableMapper(tablesManager, modelsManager);
     	var votable = vodml2VOTableMapper.toVOTable(that.getState());
     	return votable;
