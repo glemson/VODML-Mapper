@@ -749,6 +749,10 @@ var VOTablesManager = function(tablesManager) {
 					that.notifyLoadVOTableError("No VOTable found at " + url);
 					return;
 				}
+				// next is a hack to remove any namespace info from the VOTABLE
+				// this then assures (we hope) that possible DATA elements can be simply inserted in the annotated VOTable.
+				// otherwise it might get its own xmlns declaration. this avoids much more complex code there.
+				xml = xml.replace(/<VOTABLE.*?>/,'<VOTABLE>')
 				var vot = addVOTable(xml, url);
 				notifyLoadVOTableEnded(vot,url);
 			},

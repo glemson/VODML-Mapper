@@ -303,8 +303,9 @@ VODML2VOTableAnnotator = function(tablesManager, modelsManager,exportDATA = fals
 	function addDATA(source,TABLE){
 		var table = tablesManager.findTable(source.id);
 		if(table.DATA != null){
-			table.DATA.namespaceURI=VOTABLE_NAMESPACE;
-			TABLE.appendChild(table.DATA);
+			// this might cause a problem if a VOTABLE were used with namespace != the desired namespace and *no* replacement of this.
+			// see loadVOTable method in tables-manager.js for more info 
+			TABLE.appendChild(table.DATA);   
 		}
 	}	
 	
