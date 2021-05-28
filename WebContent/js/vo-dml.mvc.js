@@ -1014,6 +1014,10 @@ var VODMLMapper = (function() {
 					roots.push(this);
 				}
 			});
+			// this does not produce nicest drawing but happens if there are cycles.
+			if(roots.length == 0){
+				root = objects;
+			}
 			var t0 = getTime();
 			jsPlumb.setSuspendDrawing(true);
 			
