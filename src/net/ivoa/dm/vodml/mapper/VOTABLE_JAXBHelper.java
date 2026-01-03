@@ -5,11 +5,11 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventLocator;
-import javax.xml.bind.util.ValidationEventCollector;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationEvent;
+import jakarta.xml.bind.ValidationEventLocator;
+import jakarta.xml.bind.util.ValidationEventCollector;
 import javax.xml.stream.StreamFilter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
