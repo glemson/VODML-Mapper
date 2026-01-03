@@ -74,6 +74,9 @@ dependencies {
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
     implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
 
+    // EclipseLink MOXy (alternative JAXB implementation used by some classes)
+    implementation "org.eclipse.persistence:org.eclipse.persistence.moxy:4.0.2"
+
     // JAXB XJC tools (for code generation only - not in runtime)
     jaxb "org.glassfish.jaxb:jaxb-xjc:${jaxbXjcVersion}"
     jaxb "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
