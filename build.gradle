@@ -8,10 +8,13 @@ plugins {
 group = 'org.ivoa.vodml'
 version = '1.0.0-SNAPSHOT'
 
-// Java version configuration
+// Java version configuration for Java 21
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 // Source sets configuration
@@ -39,32 +42,46 @@ repositories {
     }
 }
 
-// Dependency versions
+// Dependency versions for Java 21
 ext {
-    servletApiVersion = '3.1.0'
-    mongoDriverVersion = '3.12.14'
-    sqlServerDriverVersion = '12.4.2.jre8'
+    servletApiVersion = '6.0.0'  // Updated for Java 21
+    mongoDriverVersion = '4.11.1'  // Updated for Java 21
+    sqlServerDriverVersion = '12.6.0.jre11'  // Updated - jre11 works with Java 21
     httpClientVersion = '4.5.14'
-    commonsIoVersion = '2.11.0'
+    commonsIoVersion = '2.15.1'
     commonsFileUploadVersion = '1.5'
-    log4jVersion = '2.20.0'
-    jsonVersion = '20231013'
-    jaxbVersion = '2.3.1'
+    log4jVersion = '2.22.1'  // Updated for Java 21
+    jsonVersion = '20240205'
+
+    // JAXB versions - using Jakarta EE 10 for Java 21
+    jaxbApiVersion = '4.0.1'
+    jaxbRuntimeVersion = '4.0.4'
+    jaxbXjcVersion = '4.0.4'
+
     stilVersion = '4.1.6'
 }
 
-dependencies {
-    // Servlet API (provided by container)
-    providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
+// Configuration for JAXB XJC compiler tools
+configurations {
+    jaxb
+}
 
-    // JAXB (required for Java 9+, optional for Java 8)
-    implementation "javax.xml.bind:jaxb-api:${jaxbVersion}"
-    implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
-    implementation "com.sun.xml.bind:jaxb-impl:${jaxbVersion}"
-    implementation "com.sun.xml.bind:jaxb-core:${jaxbVersion}"
+dependencies {
+    // Servlet API (provided by container) - Jakarta EE 10 for Java 21
+    providedCompile "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
+
+    // JAXB Runtime (Jakarta XML Binding for Java 21)
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
+    implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
+
+    // JAXB XJC tools (for code generation only - not in runtime)
+    jaxb "org.glassfish.jaxb:jaxb-xjc:${jaxbXjcVersion}"
+    jaxb "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
+    jaxb "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
+    jaxb "jakarta.activation:jakarta.activation-api:2.1.2"
 
     // Database drivers
-    implementation "org.mongodb:mongo-java-driver:${mongoDriverVersion}"
+    implementation "org.mongodb:mongodb-driver-sync:${mongoDriverVersion}"
     implementation "com.microsoft.sqlserver:mssql-jdbc:${sqlServerDriverVersion}"
 
     // Apache HTTP Client
@@ -82,12 +99,12 @@ dependencies {
     // JSON
     implementation "org.json:json:${jsonVersion}"
 
-    // Starlink STIL (VOTable parsing)
-    implementation "uk.ac.starlink:stil:${stilVersion}"
+    // Starlink STIL (VOTable parsing) - uncomment if needed
+    //implementation "uk.ac.starlink:stil:${stilVersion}"
 
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:5.6.0'
+    testImplementation 'org.mockito:mockito-core:5.10.0'
 }
 
 // War plugin configuration
@@ -111,7 +128,7 @@ war {
 // Task to generate JAXB classes from XSD schemas
 task generateJaxb {
     group = 'build'
-    description = 'Generate JAXB classes from XSD schemas'
+    description = 'Generate JAXB classes from XSD schemas using Jakarta JAXB for Java 21'
 
     def xsdDir = file('WebContent/xsd')
     def outputDir = file('jaxb-gen')
@@ -148,7 +165,8 @@ task generateJaxb {
 
             logger.lifecycle("Generating JAXB classes for ${schemaConfig.schema}")
 
-            def args = [
+            // Build XJC arguments
+            def xjcArgs = [
                 '-d', outputDir.absolutePath,
                 '-p', schemaConfig.package,
                 schemaFile.absolutePath
@@ -158,27 +176,47 @@ task generateJaxb {
             if (schemaConfig.binding) {
                 def bindingFile = new File(xsdDir, schemaConfig.binding)
                 if (bindingFile.exists()) {
-                    args.addAll(['-b', bindingFile.absolutePath])
+                    xjcArgs.addAll(['-b', bindingFile.absolutePath])
+                } else {
+                    logger.warn("Binding file not found: ${bindingFile}")
                 }
             }
 
             // Add extension flag if specified
             if (schemaConfig.extension) {
-                args.add('-extension')
+                xjcArgs.add('-extension')
             }
 
-            // Execute XJC
-            javaexec {
-                classpath = configurations.runtimeClasspath
-                mainClass = 'com.sun.tools.xjc.XJCFacade'
-                args = args
+            // Add verbose flag for debugging
+            xjcArgs.add('-verbose')
 
-                // Suppress JAXB warnings
-                systemProperty 'javax.xml.accessExternalSchema', 'all'
+            // Execute XJC using Jakarta JAXB
+            ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.jaxb.asPath
+            )
+
+            ant.xjc(
+                destdir: outputDir.absolutePath,
+                package: schemaConfig.package,
+                schema: schemaFile.absolutePath,
+                extension: schemaConfig.extension ?: false
+            ) {
+                if (schemaConfig.binding) {
+                    def bindingFile = new File(xsdDir, schemaConfig.binding)
+                    if (bindingFile.exists()) {
+                        binding(dir: xsdDir.absolutePath, includes: schemaConfig.binding)
+                    }
+                }
+                // Allow access to external schemas
+                arg(value: '-nv')  // Disable strict validation
             }
+
+            logger.lifecycle("Generated JAXB classes for ${schemaConfig.schema} -> ${schemaConfig.package}")
         }
 
-        logger.lifecycle("JAXB generation completed")
+        logger.lifecycle("JAXB generation completed successfully")
     }
 }
 
@@ -266,11 +304,14 @@ eclipse {
     }
 }
 
-// Compiler options
+// Compiler options for Java 21
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-Xlint:unchecked'
     options.compilerArgs << '-Xlint:deprecation'
+
+    // Java 21 specific options
+    options.release = 21
 }
 
 // Display project information
@@ -287,6 +328,7 @@ Project: ${project.name}
 Group: ${project.group}
 Version: ${project.version}
 Java: ${java.sourceCompatibility}
+Java Toolchain: Java ${java.toolchain.languageVersion.get()}
 
 Main Tasks:
   gradle build         - Build project and create WAR
