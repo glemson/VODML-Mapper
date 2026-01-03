@@ -1,7 +1,40 @@
+# Eclipse
 /.classpath
 /.project
 /.settings
+
+# IntelliJ IDEA
+/.idea
+*.iml
+*.iws
+*.ipr
+/out
+
+# Build outputs
 /build
-/WebContent/WEB-INF/lib
-/WebContent/WEB-INF/web.xml
+/bin
 *.class
+
+# Gradle
+/.gradle
+/gradle/wrapper/gradle-wrapper.jar
+
+# WAR file
+*.war
+
+# Dependencies
+/WebContent/WEB-INF/lib
+
+# Generated configuration
+/WebContent/WEB-INF/web.xml
+
+# JAXB generated classes (can be regenerated)
+# Uncomment the line below if you want to exclude generated JAXB classes
+# /jaxb-gen
+
+# Logs
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db

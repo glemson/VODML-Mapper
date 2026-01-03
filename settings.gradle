@@ -1,0 +1,17 @@
+rootProject.name = 'vodml-mapper'
+
+// Enable Gradle features
+enableFeaturePreview('VERSION_CATALOGS')
+
+// Display build information
+gradle.projectsLoaded {
+    println "Configuring VODML-Mapper build..."
+}
+
+gradle.buildFinished { buildResult ->
+    if (buildResult.failure) {
+        println "Build FAILED. See error messages above."
+    } else {
+        println "Build completed successfully."
+    }
+}

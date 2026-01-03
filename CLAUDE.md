@@ -9,7 +9,7 @@ VODML-Mapper is a web-based graphical tool for mapping between VO-DML (Virtual O
 **Technology Stack:**
 - **Backend:** Java Servlets with JAXB for XML processing, MongoDB or SQL Server for persistence
 - **Frontend:** jQuery-based MVC with jsPlumb for visual connection drawing, jsTree for navigation
-- **Build:** Apache Ant (for JAXB code generation)
+- **Build:** Gradle for dependency management and builds; Apache Ant (legacy JAXB generation)
 
 ## Development Commands
 
@@ -31,6 +31,72 @@ This generates Java classes in `jaxb-gen/` from:
 - `vo-dml-instance.xsd` → `org.ivoa.vodml.instance.jaxb`
 
 **IMPORTANT:** Never manually edit files in `jaxb-gen/` - they are auto-generated.
+
+### Building with Gradle (Recommended)
+
+Gradle provides modern dependency management and build automation. All dependencies are automatically downloaded from Maven Central.
+
+**Quick Start:**
+
+```bash
+# Build the entire project (generates JAXB classes, compiles, and creates WAR)
+./gradlew build
+
+# Or on Windows:
+gradlew.bat build
+```
+
+**Common Gradle Commands:**
+
+```bash
+# Generate JAXB classes from XSD schemas
+./gradlew generateJaxb
+
+# Compile Java sources
+./gradlew compileJava
+
+# Create WAR file for deployment
+./gradlew war
+# Output: build/libs/vodml-mapper-1.0.0-SNAPSHOT.war
+
+# Clean build artifacts
+./gradlew clean
+
+# Run tests
+./gradlew test
+
+# Copy dependencies to WEB-INF/lib (for manual deployment)
+./gradlew copyDependencies
+
+# Create web.xml from template
+./gradlew createWebXml
+
+# Display all available tasks
+./gradlew tasks
+
+# Display project information
+./gradlew projectInfo
+```
+
+**IDE Integration:**
+
+```bash
+# Generate Eclipse project files
+./gradlew eclipse
+
+# Generate IntelliJ IDEA project files
+./gradlew idea
+```
+
+**Gradle Benefits:**
+- Automatic dependency management (no manual JAR downloads)
+- Reproducible builds
+- Integrated JAXB code generation
+- Built-in WAR packaging
+- IDE integration
+- Modern build caching for faster builds
+
+**Note:** Gradle automatically handles JAXB code generation when you run `build` or `compileJava`.
 
 ### Deployment Configuration
 
