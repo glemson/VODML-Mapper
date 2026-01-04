@@ -14,7 +14,7 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.BSON;
@@ -433,8 +433,8 @@ public class MongoDBHelper363 implements DatabaseHelper {
 		GridFSBucket fs = getUserFiles(request);
 		GridFSUploadOptions options = new GridFSUploadOptions()
                 .chunkSizeBytes(358400)
-                .metadata(new Document("name", fi.getName()).append("contentType", fi.getContentType()));
-		ObjectId f = fs.uploadFromStream(fi.getName(),fi.getInputStream(),options);
+                .metadata(new Document("name", fi.getFileName()).append("contentType", fi.getContentType()));
+		ObjectId f = fs.uploadFromStream(fi.getFileName(),fi.getInputStream(),options);
 	}
 
 	/**

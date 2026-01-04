@@ -49,7 +49,7 @@ ext {
     sqlServerDriverVersion = '12.6.0.jre11'  // Updated - jre11 works with Java 21
     httpClientVersion = '4.5.14'
     commonsIoVersion = '2.15.1'
-    commonsFileUploadVersion = '1.5'
+    commonsFileUploadVersion = '2.0.0-M2'  // Jakarta-compatible version
     log4jVersion = '2.22.1'  // Updated for Java 21
     jsonVersion = '20240205'
 
@@ -126,7 +126,8 @@ dependencies {
 
     // Apache Commons
     implementation "commons-io:commons-io:${commonsIoVersion}"
-    implementation "commons-fileupload:commons-fileupload:${commonsFileUploadVersion}"
+    // Apache Commons FileUpload 2.x (Jakarta-compatible)
+    implementation "org.apache.commons:commons-fileupload2-jakarta-servlet6:${commonsFileUploadVersion}"
 
     // Logging
     implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"

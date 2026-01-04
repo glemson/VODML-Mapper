@@ -14,10 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.bind.JAXB;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileItem;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -129,7 +129,7 @@ public class RegistryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		if (!ServletFileUpload.isMultipartContent(request)) {
+		if (!JakartaServletFileUpload.isMultipartContent(request)) {
 			// assume JSON string passed in
 			StringBuffer jb = new StringBuffer();
 			String line = null;
@@ -159,8 +159,9 @@ public class RegistryServlet extends HttpServlet {
 		} else { // TODO put in separate method
 			File userpath = UploadHelper.getUserSpecificPath(request);
 
-			ServletFileUpload uploadHandler = new ServletFileUpload(
-					new DiskFileItemFactory());
+			JakartaServletFileUpload uploadHandler = JakartaServletFileUpload.builder()
+					.setFileItemFactory(DiskFileItemFactory.builder().get())
+					.get();
 			PrintWriter writer = response.getWriter();
 			response.setContentType("application/json");
 

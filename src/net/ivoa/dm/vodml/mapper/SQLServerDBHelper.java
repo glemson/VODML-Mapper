@@ -18,16 +18,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.ivoa.vodml.RemoteVODMLRegistry;
-import org.ivoa.vodml.VODMLRegistry;
 import org.ivoa.vodml.VODML_JAXBHelper;
 import org.ivoa.vodml.jaxb.Model;
 import org.ivoa.vodml.jaxb.Models.Modellocation;
@@ -710,13 +707,13 @@ public class SQLServerDBHelper implements DatabaseHelper {
                 String id = UUID.randomUUID().toString();
                 stmt.setString(1, id);
                 stmt.setString(2, username);
-                stmt.setString(3, fi.getName());
+                stmt.setString(3, fi.getFileName());
                 stmt.setBytes(4, fi.get());
                 stmt.setString(5, fi.getContentType());
                 stmt.setString(6, currentTime());
                 stmt.executeUpdate();
 
-                logger.info("Stored file: " + fi.getName() + " for user: " + username);
+                logger.info("Stored file: " + fi.getFileName() + " for user: " + username);
             }
 
         } catch (SQLException e) {
