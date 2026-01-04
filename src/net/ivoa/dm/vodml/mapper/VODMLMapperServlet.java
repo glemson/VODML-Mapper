@@ -38,7 +38,7 @@ public class VODMLMapperServlet extends HttpServlet {
 	private static final long serialVersionUID = 1822129616521007363L;
 	private static final Logger logger = LogManager.getLogger(VODMLMapperServlet.class);
 
-	private DatabaseHelper mongoHelper;
+	private DatabaseHelper databaseHelper;
 	private VODMLRegistry vodmlRegistry;
 
 	public static final String ACTION = "action";
@@ -56,26 +56,27 @@ public class VODMLMapperServlet extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) {
-		String mongoHost = "not-set";
-		int mongoPort = -1;
-		String mongoUser = "unknown";
-		String mongoDatabase = "not-set"; 
+		String host = "not-set";
+		int port = -1;
+		String user = "unknown";
+		String database = "not-set"; 
 		try {
-			mongoHost = config.getServletContext().getInitParameter("mongodb-host");
-			mongoPort = Integer.parseInt(config.getServletContext().getInitParameter("mongodb-port"));
-			mongoUser = config.getServletContext().getInitParameter("mongodb-user");
-			String mongoPwd = config.getServletContext().getInitParameter("mongodb-pwd");
-			mongoDatabase = config.getServletContext().getInitParameter("mongodb-database");
+			host = config.getServletContext().getInitParameter("host");
+			port = Integer.parseInt(config.getServletContext().getInitParameter("port"));
+			user = config.getServletContext().getInitParameter("user");
+			String pwd = config.getServletContext().getInitParameter("pwd");
+			database = config.getServletContext().getInitParameter("database");
 			
 			// 
-			logger.info(String.format("Connecting to MongoDB '%s' at '%s:%d' as user '%s'",mongoDatabase, mongoHost,mongoPort, mongoUser));
+			logger.info(String.format("Connecting to MongoDB '%s' at '%s:%d' as user '%s'",database, host,port, user));
 
-			mongoHelper = MongoDBHelper363.getInstance(mongoHost, mongoPort, mongoUser, mongoPwd, mongoDatabase);
+//			mongoHelper = MongoDBHelper363.getInstance(mongoHost, mongoPort, mongoUser, mongoPwd, mongoDatabase);
+      databaseHelper = SQLServerDBHelper.getInstance(host, port, user, pwd, database);
 			vodmlRegistry = new RemoteVODMLRegistry();
 		} catch (Exception e) {
-			logger.error(String.format("Error connecting to MongoDB '%s' at '%s:%d' as user '%s'",mongoDatabase,mongoHost,mongoPort, mongoUser));
+			logger.error(String.format("Error connecting to MongoDB '%s' at '%s:%d' as user '%s'",database,host,port, user));
 			e.printStackTrace();
-			mongoHelper = null;
+			databaseHelper = null;
 		}
 	}
 
@@ -268,7 +269,7 @@ public class VODMLMapperServlet extends HttpServlet {
 			String _vodmlrefs = req.getParameter("vodmlrefs");
 			String[] _projection = new String[]{"_id","owner","publicationTime","label","annotation"};
 			final JSONArray ja = new JSONArray();
-			java.util.List<JSONObject> results = mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
+			java.util.List<JSONObject> results = databaseHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
 			for (JSONObject mapping : results) {
 				ja.put(mapping);
 			}
@@ -278,7 +279,7 @@ public class VODMLMapperServlet extends HttpServlet {
 
 	private void findPublicMapping(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		JSONObject map = mongoHelper.getPublicMapping(req);
+		JSONObject map = databaseHelper.getPublicMapping(req);
 
 		PrintWriter w = resp.getWriter();
 		if(map != null)

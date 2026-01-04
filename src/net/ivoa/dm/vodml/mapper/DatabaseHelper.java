@@ -75,6 +75,15 @@ public interface DatabaseHelper extends VODMLRegistry {
     JSONObject getPublicMapping(HttpServletRequest req);
 
     /**
+     * Return a JSONObject containing all the mappings available to the specified user.<br/>
+     * This includes mappings owned by the user themselves as well as public mappings possibly created by others.
+     * @param user The username of the user for which we wan to find the mappings.
+     * @return user mappings.
+     */
+    public JSONObject listUserMappings(String user);
+
+    
+    /**
      * Query public mappings by criteria.
      *
      * @param models Comma-separated list of model names to filter by (can be null)

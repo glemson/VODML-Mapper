@@ -40,7 +40,7 @@ public class RegistryServlet extends HttpServlet {
 
 	private static final String ROOT_PATH = "registry";
 	public DatabaseHelper getMongoHelper() {
-		return mongoHelper;
+		return databaseHelper;
 	}
 
 
@@ -49,7 +49,7 @@ public class RegistryServlet extends HttpServlet {
 
 	public static final String UPLOAD_PREFIX = "UPLOAD:";
 
-	private DatabaseHelper mongoHelper;
+	private DatabaseHelper databaseHelper;
 	public static final String LOAD_VOTABLE = "loadVOTable"; // from URL
 
 	// State management actions
@@ -64,15 +64,15 @@ public class RegistryServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) {
 		try {
-			String mongoHost = config.getServletContext().getInitParameter("mongodb-host");
-			int mongoPort = Integer.parseInt(config.getServletContext().getInitParameter("mongodb-port"));
-			String mongoUser = config.getServletContext().getInitParameter("mongodb-user");
-			String mongoPwd = config.getServletContext().getInitParameter("mongodb-pwd");
-			String mongoDatabase = config.getServletContext().getInitParameter("mongodb-database");
-			mongoHelper = MongoDBHelper363.getInstance(mongoHost, mongoPort, mongoUser, mongoPwd, mongoDatabase);
+			String host = config.getServletContext().getInitParameter("host");
+			int port = Integer.parseInt(config.getServletContext().getInitParameter("port"));
+			String user = config.getServletContext().getInitParameter("user");
+			String pwd = config.getServletContext().getInitParameter("mongodpwd");
+			String database = config.getServletContext().getInitParameter("database");
+			databaseHelper = SQLServerDBHelper.getInstance(host, port, user, pwd, database);
 		} catch (Exception e) {
 			e.printStackTrace();
-			mongoHelper = null;
+			databaseHelper = null;
 		}
 	}
 
@@ -159,9 +159,7 @@ public class RegistryServlet extends HttpServlet {
 		} else { // TODO put in separate method
 			File userpath = UploadHelper.getUserSpecificPath(request);
 
-			JakartaServletFileUpload uploadHandler = JakartaServletFileUpload.builder()
-					.setFileItemFactory(DiskFileItemFactory.builder().get())
-					.get();
+			JakartaServletFileUpload uploadHandler = new JakartaServletFileUpload(DiskFileItemFactory.builder().get());
 			PrintWriter writer = response.getWriter();
 			response.setContentType("application/json");
 
@@ -171,7 +169,7 @@ public class RegistryServlet extends HttpServlet {
 				List<FileItem> items = uploadHandler.parseRequest(request);
 				for (FileItem item : items) {
 					if (!item.isFormField()) {
-						mongoHelper.putFile(request, item);
+						databaseHelper.putFile(request, item);
 						// putFile(request, item);
 
 						JSONObject jsono = new JSONObject();
@@ -200,19 +198,19 @@ public class RegistryServlet extends HttpServlet {
 
 	}
 
-	private void putFile(HttpServletRequest request, FileItem item)
-			throws Exception {
-		File file = UploadHelper.getUserFile(item.getName(), request);
-		if (file == null)
-			return;
-		item.write(file);
-	}
+//	private void putFile(HttpServletRequest request, FileItem item)
+//			throws Exception {
+//		File file = UploadHelper.getUserFile(item.getName(), request);
+//		if (file == null)
+//			return;
+//		item.write(file);
+//	}
 
 	private void listFiles(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
 		JSONObject json = new JSONObject();
-		JSONArray jsona = mongoHelper.getFiles(req);
+		JSONArray jsona = databaseHelper.getFiles(req);
 		for (int i = 0; i < jsona.length(); i++) {
 			JSONObject jsono = jsona.getJSONObject(i);
 			jsono.put("url", ROOT_PATH + "?getfile=" + jsono.get("name"));
@@ -336,24 +334,24 @@ public class RegistryServlet extends HttpServlet {
 
 	private void removeState(JSONObject state, HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
-		JSONObject result = mongoHelper.removeUserMapping(req, state);
+		JSONObject result = databaseHelper.removeUserMapping(req, state);
 		resp.getWriter().write(result.toString());
 	}
 	private void deregisterPublicMapping(JSONObject state, HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
-		JSONObject result = mongoHelper.deregisterPublicMapping(req, state);
+		JSONObject result = databaseHelper.deregisterPublicMapping(req, state);
 		resp.getWriter().write(result.toString());
 	}
 	private void publishMapping(JSONObject state, HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
-		JSONObject result = mongoHelper.publishUserMapping(req, state);
+		JSONObject result = databaseHelper.publishUserMapping(req, state);
 		resp.getWriter().write(result.toString());
 	}
 
 	private void saveState(JSONObject json, HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
 		try {
-			JSONObject result = mongoHelper.saveUserMapping(req, json);
+			JSONObject result = databaseHelper.saveUserMapping(req, json);
 			resp.getWriter().write(result.toString());
 		} catch (IOException t) {
 			logger.error("Error saving mapping:"+t.getMessage());
@@ -362,7 +360,7 @@ public class RegistryServlet extends HttpServlet {
 	}
 
 	/**
-	 * Return a state
+	 * Return a all mappings for a given user.
 	 * 
 	 * @param req
 	 * @param resp
@@ -370,37 +368,9 @@ public class RegistryServlet extends HttpServlet {
 	 */
 	private void listUserMappings(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		// Note: This method uses MongoDB-specific operations for now
-		// TODO: Consider refactoring to use interface methods only
-		MongoDBHelper363 helper = (MongoDBHelper363) mongoHelper;
-		MongoCollection<Document> c = helper.getPublicMappings();
-		String user = req.getRemoteUser();
-		BasicDBObject query = new BasicDBObject();
-		query.put("owner", user);
-
-
-		JSONObject json = new JSONObject();
-		final JSONArray pub = new JSONArray();
-		json.put("public", pub);
-		c.find(query).sort(new BasicDBObject("publicationTime",-1)).forEach(new Block<Document>() {
-			@Override
-			public void apply(Document doc) {
-				pub.put(new JSONObject(doc.toJson()));
-			}
-		});
-		// if user is logged in
-		c = helper.getUserMappings(req);
-		if(c != null){
-			final JSONArray us = new JSONArray();
-			json.put("user", us);
-			c.find().sort(new BasicDBObject("insertTime",-1)).forEach(new Block<Document>() {
-				@Override
-				public void apply(Document doc) {
-					us.put(new JSONObject(doc.toJson()));
-				}
-			});
-		}
-		json.write(resp.getWriter());
+    String user = req.getRemoteUser();
+    JSONObject json = databaseHelper.listUserMappings(user);
+    json.write(resp.getWriter());
 	}
 	/**
 	 * Return a state
@@ -416,7 +386,7 @@ public class RegistryServlet extends HttpServlet {
 		String _vodmlrefs = req.getParameter("vodmlrefs");
 		String[] _projection = new String[]{"_id","owner","publicationTime","label","annotation"};
 		final JSONArray ja = new JSONArray();
-		List<JSONObject> results = mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
+		List<JSONObject> results = databaseHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
 		for (JSONObject mapping : results) {
 			ja.put(mapping);
 		}
@@ -427,7 +397,7 @@ public class RegistryServlet extends HttpServlet {
 	
 	private void findMapping(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		JSONObject map = mongoHelper.getMapping(req,getRequestUser(req));
+		JSONObject map = databaseHelper.getMapping(req,getRequestUser(req));
 
 		PrintWriter w = resp.getWriter();
 		if(map != null)

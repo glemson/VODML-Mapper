@@ -707,13 +707,13 @@ public class SQLServerDBHelper implements DatabaseHelper {
                 String id = UUID.randomUUID().toString();
                 stmt.setString(1, id);
                 stmt.setString(2, username);
-                stmt.setString(3, fi.getFileName());
+                stmt.setString(3, fi.getName());
                 stmt.setBytes(4, fi.get());
                 stmt.setString(5, fi.getContentType());
                 stmt.setString(6, currentTime());
                 stmt.executeUpdate();
 
-                logger.info("Stored file: " + fi.getFileName() + " for user: " + username);
+                logger.info("Stored file: " + fi.getName() + " for user: " + username);
             }
 
         } catch (SQLException e) {

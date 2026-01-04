@@ -44,6 +44,7 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSBuckets;
@@ -182,6 +183,35 @@ public class MongoDBHelper363 implements DatabaseHelper {
 	}
 	public MongoCollection<Document> getUserMappings(String username) {
 		return mongoDB.getCollection(username + ".states");
+	}
+	
+	@Override
+	public JSONObject listUserMappings(String user) {
+	   // Note: This method uses MongoDB-specific operations for now
+    // TODO: Consider refactoring to use interface methods only
+    MongoCollection<Document> c = this.getPublicMappings();
+    BasicDBObject query = new BasicDBObject();
+    query.put("owner", user);
+
+
+    JSONObject json = new JSONObject();
+    final JSONArray pub = new JSONArray();
+    json.put("public", pub);
+    FindIterable<Document> fit = c.find(query).sort(new BasicDBObject("publicationTime",-1));
+    for(Document doc : fit) {
+      pub.put(new JSONObject(doc.toJson()));
+    }
+    // if user is logged in
+    c = this.getUserMappings(user);
+    if(c != null){
+      final JSONArray us = new JSONArray();
+      json.put("user", us);
+      fit = c.find().sort(new BasicDBObject("insertTime",-1));
+      for (Document doc: fit) {
+        us.put(new JSONObject(doc.toJson()));
+      };
+    }
+    return json;
 	}
 	
 	public MongoCollection<Document> getPublicMappings() {
