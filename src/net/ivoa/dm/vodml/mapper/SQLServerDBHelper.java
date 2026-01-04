@@ -864,4 +864,10 @@ public class SQLServerDBHelper implements DatabaseHelper {
 
         return mapping;
     }
+
+    @Override
+    public JSONObject listUserMappings(String user) {
+      // TODO Auto-generated method stub
+      return null;
+    }
 }
