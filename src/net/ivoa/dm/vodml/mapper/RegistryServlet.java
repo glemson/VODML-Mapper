@@ -21,21 +21,16 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bson.Document;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ivoa.votable.jaxb.VOTABLE;
 
+// MongoDB imports only needed for listUserMappings method that uses MongoDB-specific operations
+import org.bson.Document;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.QueryBuilder;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.gridfs.GridFSDBFile;
 
 public class RegistryServlet extends HttpServlet {
 
@@ -293,35 +288,39 @@ public class RegistryServlet extends HttpServlet {
 
 				// Fallback for common types if probeContentType returns null
 				if (mimetype == null || mimetype.isEmpty()) {
-					String suffix = getSuffix(file.getName()).toLowerCase();
-					mimetype = switch (suffix) {
-						case "png" -> "image/png";
-						case "jpg", "jpeg" -> "image/jpeg";
-						case "gif" -> "image/gif";
-						case "xml" -> "application/xml";
-						case "json" -> "application/json";
-						case "txt" -> "text/plain";
-						case "html", "htm" -> "text/html";
-						default -> "application/octet-stream";
-					};
+					mimetype = getMimeTypeFromExtension(file.getName());
 				}
 			} catch (java.io.IOException e) {
 				// If probeContentType fails, use fallback based on extension
-				String suffix = getSuffix(file.getName()).toLowerCase();
-				mimetype = switch (suffix) {
-					case "png" -> "image/png";
-					case "jpg", "jpeg" -> "image/jpeg";
-					case "gif" -> "image/gif";
-					case "xml" -> "application/xml";
-					case "json" -> "application/json";
-					case "txt" -> "text/plain";
-					case "html", "htm" -> "text/html";
-					default -> "application/octet-stream";
-				};
+				mimetype = getMimeTypeFromExtension(file.getName());
 			}
 		}
 		System.out.println("mimetype: " + mimetype);
 		return mimetype;
+	}
+
+	private String getMimeTypeFromExtension(String filename) {
+		String suffix = getSuffix(filename).toLowerCase();
+		switch (suffix) {
+			case "png":
+				return "image/png";
+			case "jpg":
+			case "jpeg":
+				return "image/jpeg";
+			case "gif":
+				return "image/gif";
+			case "xml":
+				return "application/xml";
+			case "json":
+				return "application/json";
+			case "txt":
+				return "text/plain";
+			case "html":
+			case "htm":
+				return "text/html";
+			default:
+				return "application/octet-stream";
+		}
 	}
 
 	private String getSuffix(String filename) {
@@ -416,14 +415,10 @@ public class RegistryServlet extends HttpServlet {
 		String _vodmlrefs = req.getParameter("vodmlrefs");
 		String[] _projection = new String[]{"_id","owner","publicationTime","label","annotation"};
 		final JSONArray ja = new JSONArray();
-	    mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection).forEach(new Block<Document>() {
-
-			@Override
-			public void apply(Document doc) {
-				ja.put(new JSONObject(doc.toJson()));
-			}
-			
-		});;
+		List<JSONObject> results = mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
+		for (JSONObject mapping : results) {
+			ja.put(mapping);
+		}
 		PrintWriter pw = resp.getWriter();
 		pw.print(ja.toString());
 	}
