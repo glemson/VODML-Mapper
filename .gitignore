@@ -25,6 +25,9 @@
 # Dependencies
 /WebContent/WEB-INF/lib
 
+# Downloaded JAR dependencies (auto-downloaded by Gradle)
+/libs
+
 # Generated configuration
 /WebContent/WEB-INF/web.xml
 

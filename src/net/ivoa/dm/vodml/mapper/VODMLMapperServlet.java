@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.bind.JAXB;
 
-import org.bson.Document;
 import org.ivoa.vodml.RemoteVODMLRegistry;
 import org.ivoa.vodml.VODMLManager;
 import org.ivoa.vodml.VODMLRegistry;
@@ -28,7 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mongodb.Block;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -40,7 +38,7 @@ public class VODMLMapperServlet extends HttpServlet {
 	private static final long serialVersionUID = 1822129616521007363L;
 	private static final Logger logger = LogManager.getLogger(VODMLMapperServlet.class);
 
-	private MongoDBHelper363 mongoHelper;
+	private DatabaseHelper mongoHelper;
 	private VODMLRegistry vodmlRegistry;
 
 	public static final String ACTION = "action";
@@ -270,21 +268,17 @@ public class VODMLMapperServlet extends HttpServlet {
 			String _vodmlrefs = req.getParameter("vodmlrefs");
 			String[] _projection = new String[]{"_id","owner","publicationTime","label","annotation"};
 			final JSONArray ja = new JSONArray();
-		    mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection).forEach(new Block<Document>() {
-
-				@Override
-				public void apply(Document doc) {
-					ja.put(new JSONObject(doc.toJson()));
-				}
-				
-			});;
+			java.util.List<JSONObject> results = mongoHelper.queryPublicMappings(_models, _types, _vodmlrefs, _projection);
+			for (JSONObject mapping : results) {
+				ja.put(mapping);
+			}
 			PrintWriter pw = resp.getWriter();
 			pw.print(ja.toString());
 	}
 
 	private void findPublicMapping(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		Document map = mongoHelper.getPublicMapping(req);
+		JSONObject map = mongoHelper.getPublicMapping(req);
 
 		PrintWriter w = resp.getWriter();
 		if(map != null)

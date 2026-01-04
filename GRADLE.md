@@ -26,10 +26,11 @@ gradlew.bat build
 ```
 
 This single command will:
-1. Generate JAXB classes from XSD schemas
-2. Compile all Java sources
-3. Package everything into a WAR file
-4. Output: `build/libs/vodml-mapper-1.0.0-SNAPSHOT.war`
+1. Download STIL library (if not present)
+2. Generate JAXB classes from XSD schemas
+3. Compile all Java sources
+4. Package everything into a WAR file
+5. Output: `build/libs/vodml-mapper-1.0.0-SNAPSHOT.war`
 
 ### Deploy the WAR
 
@@ -174,25 +175,48 @@ VODML-Mapper/
 
 ## Dependencies
 
-All dependencies are automatically managed by Gradle and downloaded from Maven Central.
+Most dependencies are automatically managed by Gradle and downloaded from Maven Central. The STIL library is downloaded from Bristol University.
 
 ### Runtime Dependencies
 
-- **Servlet API** 3.1.0 (provided)
-- **JAXB** 2.3.1 (API and implementation)
-- **MongoDB Driver** 3.12.14
-- **SQL Server JDBC Driver** 12.4.2
+- **Jakarta Servlet API** 6.0.0 (provided by container) - Jakarta EE 10 for Java 21
+- **Jakarta XML Binding (JAXB)** 4.0.1 API, 4.0.4 Runtime - Jakarta EE 10
+- **EclipseLink MOXy** 4.0.2 (alternative JAXB implementation)
+- **MongoDB Driver** 4.11.1
+- **SQL Server JDBC Driver** 12.6.0.jre11
 - **Apache HTTP Client** 4.5.14
-- **Apache Commons IO** 2.11.0
+- **Apache Commons IO** 2.15.1
 - **Apache Commons FileUpload** 1.5
-- **Log4j2** 2.20.0
-- **JSON** (org.json) 20231013
-- **Starlink STIL** 4.1.6 (VOTable parsing)
+- **Log4j2** 2.22.1
+- **JSON** (org.json) 20240205
+- **Starlink STIL** 4.1.6 (VOTable parsing) - *Auto-downloaded from Bristol University*
+
+### STIL Library (Special Handling)
+
+The Starlink Tables Infrastructure Library (STIL) is not available in Maven Central, so it's handled specially:
+
+**Automatic Download:**
+```bash
+# STIL is automatically downloaded during build, but you can also run:
+./gradlew downloadStil
+```
+
+**Details:**
+- **Source:** https://www.star.bristol.ac.uk/mbt/stil/stil.jar
+- **Location:** `libs/stil.jar` (automatically created)
+- **Used for:** VOTable parsing in `TAPInterpreter.java`
+- **Git status:** Excluded from version control (in `.gitignore`)
+
+**Manual Download (if needed):**
+If automatic download fails:
+1. Download JAR from https://www.star.bristol.ac.uk/mbt/stil/stil.jar
+2. Create `libs/` directory in project root
+3. Save as `libs/stil.jar`
 
 ### Test Dependencies
 
 - **JUnit** 4.13.2
-- **Mockito** 5.6.0
+- **Mockito** 5.10.0
 
 ## Configuration
 

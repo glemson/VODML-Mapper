@@ -58,7 +58,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
 import com.mongodb.util.JSON;
 
-public class MongoDBHelper363 implements VODMLRegistry{
+public class MongoDBHelper363 implements DatabaseHelper {
 	private static final Logger logger = LogManager.getLogger(MongoDBHelper363.class);
 
 	private static MongoDBHelper363 instance;
@@ -148,6 +148,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Model addModel(String name,String[] urls,String docURL) throws Exception {
 		// TODO Auto-generated method stub
 		Model m = VODML_JAXBHelper.jaxb.parseVODML(new URL(urls[0]).openStream());
@@ -186,17 +187,18 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	public MongoCollection<Document> getPublicMappings() {
 		return mongoDB.getCollection("public.mappings");
 	}
-	public Document getMapping(HttpServletRequest req, String user){
+	@Override
+	public JSONObject getMapping(HttpServletRequest req, String user){
 		String id = req.getParameter("_id");
 		MongoCollection<Document> c = getPublicMappings();
 		Document d = getMapping(c,id);
-		
+
 		if(d == null && user != null)
 		{
 			c = getUserMappings(user);
 			d = getMapping(c, id);
 		}
-		return d;
+		return d != null ? new JSONObject(d.toJson()) : null;
 	}
 	private Document getMapping(MongoCollection<Document> collection, String _id){
 		if(collection == null)
@@ -207,7 +209,8 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		Document map = collection.find(query).first();
 		return map;
 	}
-	public Document getPublicMapping(HttpServletRequest req){
+	@Override
+	public JSONObject getPublicMapping(HttpServletRequest req){
 		MongoCollection<Document> c;
 		c = getPublicMappings();
 		String id = req.getParameter("_id");
@@ -215,10 +218,11 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		query.put("_id", new ObjectId(id));
 
 		Document map = c.find(query).first();
-		return map;
+		return map != null ? new JSONObject(map.toJson()) : null;
 	}
-	public FindIterable<Document> queryPublicMappings(String _models, String _types, String _vodmlrefs, String[] fields){
-		
+	@Override
+	public java.util.List<JSONObject> queryPublicMappings(String _models, String _types, String _vodmlrefs, String[] fields){
+
 		Bson query = exists("models"); // default initializer
 
 		if(_models != null && _models.trim().length() > 0){
@@ -236,7 +240,14 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		}
 
 		MongoCollection<Document> c = getPublicMappings();
-		return c.find(query).projection(Projections.include(fields));
+		FindIterable<Document> results = c.find(query).projection(Projections.include(fields));
+
+		// Convert FindIterable<Document> to List<JSONObject>
+		java.util.List<JSONObject> jsonResults = new ArrayList<>();
+		for (Document doc : results) {
+			jsonResults.add(new JSONObject(doc.toJson()));
+		}
+		return jsonResults;
 	}
 
 	/**
@@ -265,6 +276,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	 * Return JSONObject with result (ok or error) and label fo new state or
 	 * error message
 	 */
+	@Override
 	public JSONObject saveUserMapping(HttpServletRequest req, JSONObject json) {
 
 		MongoCollection<Document> col = getUserMappings(req);
@@ -310,6 +322,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	 * Publish a mapping identified by its _id by moving it from the user's
 	 * collection of mappings to the public collection.
 	 */
+	@Override
 	public JSONObject publishUserMapping(HttpServletRequest req,
 			JSONObject state) {
 		JSONObject result = new JSONObject();
@@ -354,6 +367,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	 * Remove a mapping identified by its _id from the user's collection of
 	 * mappings.
 	 */
+	@Override
 	public JSONObject removeUserMapping(HttpServletRequest req, JSONObject state) {
 		JSONObject result = new JSONObject();
 		try {
@@ -376,6 +390,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		return result;
 	}
 
+	@Override
 	public boolean removeModel(String name) {
 		try {
 			MongoCollection<Document> col = getIVOAModelsCollection();
@@ -389,7 +404,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		return true;
 	}
 
-	
+	@Override
 	public JSONObject deregisterPublicMapping(HttpServletRequest req, JSONObject state) {
 		JSONObject result = new JSONObject();
 		try {
@@ -411,7 +426,8 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		}
 		return result;
 	}
-	
+
+	@Override
 	public void putFile(HttpServletRequest request, FileItem fi)
 			throws IOException {
 		GridFSBucket fs = getUserFiles(request);
@@ -427,6 +443,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 	 * @param file
 	 * @return
 	 */
+	@Override
 	public boolean putFile(String collectionName, String name, URL url, String contentType ) throws IOException
 	{
 		GridFSBucket fs = GridFSBuckets.create(mongoDB, collectionName+".fs");
@@ -436,7 +453,8 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		ObjectId fileId = fs.uploadFromStream(name, url.openStream(), options);
 		return true;
 	}
-	
+
+	@Override
 	public boolean deleteFile(HttpServletRequest request, String name)
 			throws IOException {
 		GridFSBucket fs = getUserFiles(request);
@@ -444,6 +462,7 @@ public class MongoDBHelper363 implements VODMLRegistry{
 		return true;
 	}
 
+	@Override
 	public JSONArray getFiles(HttpServletRequest request) {
 		GridFSBucket fs = getUserFiles(request);
 		final JSONArray jsona = new JSONArray();

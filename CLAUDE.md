@@ -34,7 +34,7 @@ This generates Java classes in `jaxb-gen/` from:
 
 ### Building with Gradle (Recommended)
 
-Gradle provides modern dependency management and build automation. All dependencies are automatically downloaded from Maven Central.
+Gradle provides modern dependency management and build automation. Most dependencies are automatically downloaded from Maven Central. The STIL library (Starlink Tables Infrastructure Library) is automatically downloaded from Bristol University when needed.
 
 **Quick Start:**
 
@@ -97,6 +97,39 @@ gradlew.bat build
 - Modern build caching for faster builds
 
 **Note:** Gradle automatically handles JAXB code generation when you run `build` or `compileJava`.
+
+### Dependencies
+
+**STIL Library (Starlink Tables Infrastructure Library):**
+
+The project uses the STIL library for VOTable parsing. Since STIL is not available in Maven Central, it's automatically downloaded from Bristol University:
+
+```bash
+# Download STIL library (automatically run during build)
+./gradlew downloadStil
+```
+
+- **Download URL:** https://www.star.bristol.ac.uk/mbt/stil/stil.jar
+- **Location:** `libs/stil.jar` (automatically created)
+- **Auto-download:** The build process automatically downloads STIL before compilation
+- **Git ignore:** The `libs/` directory is excluded from version control
+
+If the download fails (e.g., network issues), you can manually:
+1. Download the JAR from the URL above
+2. Create a `libs` directory in the project root
+3. Save the JAR as `libs/stil.jar`
+
+**Other Dependencies:**
+
+All other dependencies are managed through Gradle and automatically downloaded from Maven Central:
+- Jakarta Servlet API 6.0.0
+- Jakarta XML Binding (JAXB) 4.0.x
+- MongoDB Driver 4.11.1
+- SQL Server JDBC Driver 12.6.0
+- Apache Commons (IO, FileUpload)
+- Apache HTTP Client
+- Log4j 2.22.1
+- JSON library
 
 ### Deployment Configuration
 

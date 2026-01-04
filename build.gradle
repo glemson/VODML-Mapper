@@ -36,9 +36,9 @@ sourceSets {
 repositories {
     mavenCentral()
 
-    // For Starlink STIL library
-    maven {
-        url 'https://www.starlink.ac.uk/maven-repository/'
+    // Flatdir repository for local JAR files (e.g., STIL)
+    flatDir {
+        dirs 'libs'
     }
 }
 
@@ -59,6 +59,39 @@ ext {
     jaxbXjcVersion = '4.0.4'
 
     stilVersion = '4.1.6'
+    stilUrl = 'https://www.star.bristol.ac.uk/mbt/stil/stil.jar'
+    stilJarName = 'stil.jar'
+}
+
+// Task to download STIL JAR if not present
+task downloadStil {
+    group = 'build setup'
+    description = 'Download STIL library JAR from Bristol University'
+
+    def stilJar = file("libs/${stilJarName}")
+
+    outputs.file stilJar
+    outputs.upToDateWhen { stilJar.exists() }
+
+    doLast {
+        if (!stilJar.exists()) {
+            logger.lifecycle("Downloading STIL library from ${stilUrl}")
+
+            // Create libs directory if it doesn't exist
+            stilJar.parentFile.mkdirs()
+
+            // Download the JAR
+            new URL(stilUrl).withInputStream { input ->
+                stilJar.withOutputStream { output ->
+                    output << input
+                }
+            }
+
+            logger.lifecycle("STIL library downloaded to ${stilJar}")
+        } else {
+            logger.lifecycle("STIL library already exists at ${stilJar}")
+        }
+    }
 }
 
 // Configuration for JAXB XJC compiler tools
@@ -102,8 +135,9 @@ dependencies {
     // JSON
     implementation "org.json:json:${jsonVersion}"
 
-    // Starlink STIL (VOTable parsing) - uncomment if needed
-    //implementation "uk.ac.starlink:stil:${stilVersion}"
+    // Starlink STIL (VOTable parsing) - downloaded from Bristol University
+    // The JAR is automatically downloaded by the downloadStil task
+    implementation files("libs/${stilJarName}")
 
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
@@ -223,8 +257,8 @@ task generateJaxb {
     }
 }
 
-// Make compileJava depend on generateJaxb
-compileJava.dependsOn generateJaxb
+// Make compileJava depend on generateJaxb and downloadStil
+compileJava.dependsOn generateJaxb, downloadStil
 
 // Clean task to remove generated JAXB classes
 clean {
@@ -337,6 +371,7 @@ Main Tasks:
   gradle build         - Build project and create WAR
   gradle war           - Create WAR file
   gradle generateJaxb  - Generate JAXB classes from XSD
+  gradle downloadStil  - Download STIL library JAR (auto-run by build)
   gradle clean         - Clean build artifacts
   gradle copyDeps      - Copy dependencies to WEB-INF/lib
   gradle test          - Run tests

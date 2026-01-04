@@ -46,7 +46,7 @@ import org.json.JSONObject;
  *
  * See accompanying schema.sql for database setup.
  */
-public class SQLServerDBHelper implements VODMLRegistry {
+public class SQLServerDBHelper implements DatabaseHelper {
     private static final Logger logger = LogManager.getLogger(SQLServerDBHelper.class);
 
     private static SQLServerDBHelper instance;
@@ -136,6 +136,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
      * @param docURL Documentation URL
      * @return Parsed Model object
      */
+    @Override
     public Model addModel(String name, String[] urls, String docURL) throws Exception {
         // Parse the model from the first URL
         Model m = VODML_JAXBHelper.jaxb.parseVODML(new URL(urls[0]).openStream());
@@ -182,6 +183,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Remove a model from the database.
      */
+    @Override
     public boolean removeModel(String name) {
         try (Connection conn = getConnection()) {
             conn.setAutoCommit(false);
@@ -260,6 +262,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
      * @param json JSON object containing state, annotation, label, and optional _id
      * @return JSON result with status
      */
+    @Override
     public JSONObject saveUserMapping(HttpServletRequest req, JSONObject json) {
         String username = getUsername(req);
         JSONObject state = json.getJSONObject("state");
@@ -341,6 +344,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Get a mapping by ID (checks both public and user collections).
      */
+    @Override
     public JSONObject getMapping(HttpServletRequest req, String username) {
         String id = req.getParameter("_id");
 
@@ -387,6 +391,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Get a public mapping by ID.
      */
+    @Override
     public JSONObject getPublicMapping(HttpServletRequest req) {
         String id = req.getParameter("_id");
 
@@ -422,6 +427,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
      * @param fields Fields to include in results
      * @return List of matching mappings as JSONObjects
      */
+    @Override
     public List<JSONObject> queryPublicMappings(String _models, String _types, String _vodmlrefs, String[] fields) {
         List<JSONObject> results = new ArrayList<>();
 
@@ -506,6 +512,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Publish a user mapping to the public collection.
      */
+    @Override
     public JSONObject publishUserMapping(HttpServletRequest req, JSONObject params) {
         JSONObject result = new JSONObject();
         String username = getUsername(req);
@@ -610,6 +617,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Remove a user mapping.
      */
+    @Override
     public JSONObject removeUserMapping(HttpServletRequest req, JSONObject params) {
         JSONObject result = new JSONObject();
         String username = getUsername(req);
@@ -647,6 +655,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Deregister (remove) a public mapping owned by the current user.
      */
+    @Override
     public JSONObject deregisterPublicMapping(HttpServletRequest req, JSONObject params) {
         JSONObject result = new JSONObject();
         String username = getUsername(req);
@@ -688,6 +697,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Store an uploaded file.
      */
+    @Override
     public void putFile(HttpServletRequest request, FileItem fi) throws IOException {
         String username = getUsername(request);
 
@@ -717,6 +727,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Store a file from a remote URL.
      */
+    @Override
     public boolean putFile(String tableName, String name, URL url, String contentType) throws IOException {
         try (InputStream in = url.openStream()) {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -755,6 +766,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * Delete a file.
      */
+    @Override
     public boolean deleteFile(HttpServletRequest request, String name) throws IOException {
         String username = getUsername(request);
 
@@ -777,6 +789,7 @@ public class SQLServerDBHelper implements VODMLRegistry {
     /**
      * List all files for a user.
      */
+    @Override
     public JSONArray getFiles(HttpServletRequest request) {
         String username = getUsername(request);
         JSONArray files = new JSONArray();

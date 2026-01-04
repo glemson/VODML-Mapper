@@ -42,19 +42,19 @@ public class RegistryServlet extends HttpServlet {
 	// private static final long serialVersionUID = 1L;
 	private static final Logger logger = LogManager.getLogger(RegistryServlet.class);
 
-	
+
 	private static final String ROOT_PATH = "registry";
-	public MongoDBHelper363 getMongoHelper() {
+	public DatabaseHelper getMongoHelper() {
 		return mongoHelper;
 	}
 
 
 	private static final String PRIVATE_PATH = ROOT_PATH+"_private";
 	private static final String PUBLIC_PATH = ROOT_PATH;
-	
+
 	public static final String UPLOAD_PREFIX = "UPLOAD:";
-	
-	private MongoDBHelper363 mongoHelper;
+
+	private DatabaseHelper mongoHelper;
 	public static final String LOAD_VOTABLE = "loadVOTable"; // from URL
 
 	// State management actions
@@ -287,17 +287,37 @@ public class RegistryServlet extends HttpServlet {
 	private String getMimeType(File file) {
 		String mimetype = "";
 		if (file.exists()) {
-			// URLConnection uc = new URL("file://" +
-			// file.getAbsolutePath()).openConnection();
-			// String mimetype = uc.getContentType();
-			// MimetypesFIleTypeMap gives PNG as application/octet-stream, but
-			// it seems so does URLConnection
-			// have to make dirty workaround
-			if (getSuffix(file.getName()).equalsIgnoreCase("png")) {
-				mimetype = "image/png";
-			} else {
-				javax.activation.MimetypesFileTypeMap mtMap = new javax.activation.MimetypesFileTypeMap();
-				mimetype = mtMap.getContentType(file);
+			try {
+				// Use Java NIO Files.probeContentType() - built-in since Java 7
+				mimetype = java.nio.file.Files.probeContentType(file.toPath());
+
+				// Fallback for common types if probeContentType returns null
+				if (mimetype == null || mimetype.isEmpty()) {
+					String suffix = getSuffix(file.getName()).toLowerCase();
+					mimetype = switch (suffix) {
+						case "png" -> "image/png";
+						case "jpg", "jpeg" -> "image/jpeg";
+						case "gif" -> "image/gif";
+						case "xml" -> "application/xml";
+						case "json" -> "application/json";
+						case "txt" -> "text/plain";
+						case "html", "htm" -> "text/html";
+						default -> "application/octet-stream";
+					};
+				}
+			} catch (java.io.IOException e) {
+				// If probeContentType fails, use fallback based on extension
+				String suffix = getSuffix(file.getName()).toLowerCase();
+				mimetype = switch (suffix) {
+					case "png" -> "image/png";
+					case "jpg", "jpeg" -> "image/jpeg";
+					case "gif" -> "image/gif";
+					case "xml" -> "application/xml";
+					case "json" -> "application/json";
+					case "txt" -> "text/plain";
+					case "html", "htm" -> "text/html";
+					default -> "application/octet-stream";
+				};
 			}
 		}
 		System.out.println("mimetype: " + mimetype);
@@ -350,11 +370,14 @@ public class RegistryServlet extends HttpServlet {
 	 */
 	private void listUserMappings(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		MongoCollection<Document> c = mongoHelper.getPublicMappings();
+		// Note: This method uses MongoDB-specific operations for now
+		// TODO: Consider refactoring to use interface methods only
+		MongoDBHelper363 helper = (MongoDBHelper363) mongoHelper;
+		MongoCollection<Document> c = helper.getPublicMappings();
 		String user = req.getRemoteUser();
 		BasicDBObject query = new BasicDBObject();
 		query.put("owner", user);
-		
+
 
 		JSONObject json = new JSONObject();
 		final JSONArray pub = new JSONArray();
@@ -366,7 +389,7 @@ public class RegistryServlet extends HttpServlet {
 			}
 		});
 		// if user is logged in
-		c = mongoHelper.getUserMappings(req);
+		c = helper.getUserMappings(req);
 		if(c != null){
 			final JSONArray us = new JSONArray();
 			json.put("user", us);
@@ -408,13 +431,13 @@ public class RegistryServlet extends HttpServlet {
 	
 	private void findMapping(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		Document map = mongoHelper.getMapping(req,getRequestUser(req));
+		JSONObject map = mongoHelper.getMapping(req,getRequestUser(req));
 
 		PrintWriter w = resp.getWriter();
 		if(map != null)
 		{
 			w.print("{\"result\":\"ok\",\"map\":");
-			w.print(map.toJson());
+			w.print(map.toString(2));
 			w.print("}");
 		}
 		else
