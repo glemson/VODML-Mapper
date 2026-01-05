@@ -17,22 +17,22 @@ java {
     }
 }
 
-// Source sets configuration
+// Source sets configuration - using standard Gradle layout
 sourceSets {
     main {
         java {
-            srcDirs = ['src', 'vodml/src', 'jaxb-gen']
+            srcDirs = ['src/main/java', 'jaxb-gen']
         }
         resources {
-            srcDirs = ['src']
-            include '**/*.xml'
-            include '**/*.properties'
-            include '**/*.json'
+            srcDirs = ['src/main/resources']
         }
     }
     test {
         java {
             srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
         }
     }
 }
