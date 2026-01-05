@@ -30,6 +30,11 @@ sourceSets {
             include '**/*.json'
         }
     }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
 }
 
 // Repository configuration
