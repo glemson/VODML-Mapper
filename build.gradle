@@ -9,11 +9,14 @@ group = 'org.ivoa.vodml'
 version = '1.0.0-SNAPSHOT'
 
 // Java version configuration for Java 17
+// This configures the project to compile and run with Java 17,
+// even if Gradle itself is running on a newer Java version
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
+        // Gradle will automatically download and use Java 17 if not found locally
     }
 }
 
@@ -106,7 +109,7 @@ configurations {
 
 dependencies {
     // Servlet API (provided by container) - Jakarta EE 10 for Java 17+
-    providedCompile "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
+    compileOnly "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
 
     // JAXB Runtime (Jakarta XML Binding for Java 17+)
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
