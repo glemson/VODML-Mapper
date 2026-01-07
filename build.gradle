@@ -110,6 +110,7 @@ configurations {
 dependencies {
     // Servlet API (provided by container) - Jakarta EE 10 for Java 17+
     compileOnly "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
+    testImplementation "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
 
     // JAXB Runtime (Jakarta XML Binding for Java 17+)
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
@@ -157,6 +158,9 @@ dependencies {
 war {
     archiveBaseName = 'vodml-mapper'
     archiveVersion = version
+
+    // Handle duplicate files by using the first occurrence
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     // Include web content
     from('WebContent') {
