@@ -17,7 +17,7 @@
 
 # Gradle
 /.gradle
-/gradle/wrapper/gradle-wrapper.jar
+# Note: gradle-wrapper.jar should be committed (best practice)
 
 # WAR file
 *.war
