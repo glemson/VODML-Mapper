@@ -8,12 +8,12 @@ plugins {
 group = 'org.ivoa.vodml'
 version = '1.0.0-SNAPSHOT'
 
-// Java version configuration for Java 21
+// Java version configuration for Java 17
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -47,18 +47,18 @@ repositories {
     }
 }
 
-// Dependency versions for Java 21
+// Dependency versions for Java 17
 ext {
-    servletApiVersion = '6.0.0'  // Updated for Java 21
-    mongoDriverVersion = '4.11.1'  // Updated for Java 21
-    sqlServerDriverVersion = '12.6.0.jre11'  // Updated - jre11 works with Java 21
+    servletApiVersion = '6.0.0'  // Jakarta EE 10 compatible with Java 17+
+    mongoDriverVersion = '4.11.1'
+    sqlServerDriverVersion = '12.6.0.jre11'  // jre11 works with Java 17
     httpClientVersion = '4.5.14'
     commonsIoVersion = '2.15.1'
     commonsFileUploadVersion = '2.0.0-M2'  // Jakarta-compatible version
-    log4jVersion = '2.22.1'  // Updated for Java 21
+    log4jVersion = '2.22.1'
     jsonVersion = '20240205'
 
-    // JAXB versions - using Jakarta EE 10 for Java 21
+    // JAXB versions - using Jakarta EE 10 for Java 17+
     jaxbApiVersion = '4.0.1'
     jaxbRuntimeVersion = '4.0.4'
     jaxbXjcVersion = '4.0.4'
@@ -105,10 +105,10 @@ configurations {
 }
 
 dependencies {
-    // Servlet API (provided by container) - Jakarta EE 10 for Java 21
+    // Servlet API (provided by container) - Jakarta EE 10 for Java 17+
     providedCompile "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
 
-    // JAXB Runtime (Jakarta XML Binding for Java 21)
+    // JAXB Runtime (Jakarta XML Binding for Java 17+)
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
     implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbRuntimeVersion}"
 
@@ -171,7 +171,7 @@ war {
 // Task to generate JAXB classes from XSD schemas
 task generateJaxb {
     group = 'build'
-    description = 'Generate JAXB classes from XSD schemas using Jakarta JAXB for Java 21'
+    description = 'Generate JAXB classes from XSD schemas using Jakarta JAXB for Java 17+'
 
     def xsdDir = file('WebContent/xsd')
     def outputDir = file('jaxb-gen')
@@ -347,14 +347,14 @@ eclipse {
     }
 }
 
-// Compiler options for Java 21
+// Compiler options for Java 17
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-Xlint:unchecked'
     options.compilerArgs << '-Xlint:deprecation'
 
-    // Java 21 specific options
-    options.release = 21
+    // Java 17 release flag
+    options.release = 17
 }
 
 // Display project information
