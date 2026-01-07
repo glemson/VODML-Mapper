@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bson.json.JsonObject;
 import org.ivoa.vodml.RemoteVODMLRegistry;
 import org.ivoa.vodml.VODML_JAXBHelper;
 import org.ivoa.vodml.jaxb.Model;
@@ -865,7 +866,30 @@ public class SQLServerDBHelper implements DatabaseHelper {
 
     @Override
     public JSONObject listUserMappings(String user) {
-      // TODO Auto-generated method stub
-      return null;
+  // @TODO check code
+        String sql = "SELECT id, state, annotation, label, insert_time" +
+            " FROM " + USER_MAPPINGS_TABLE + " WHERE username = ?";
+        JSONObject result = new JSONObject(); 
+        try {
+            JSONArray files = new JSONArray();
+            result.put("USER_MAPPINGS", files);
+            Connection conn = getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, user);
+            ResultSet rs = null;
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                JSONObject file = new JSONObject();
+                file.put("_id", rs.getString("id"));
+                file.put("name", rs.getString("filename"));
+                file.put("size", rs.getLong("size"));
+                file.put("delete_type", "GET");
+                files.put(file);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
     }
 }
